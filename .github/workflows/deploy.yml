@@ -24,6 +24,10 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -31,7 +35,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
