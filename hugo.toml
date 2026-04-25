@@ -1,0 +1,28 @@
+baseURL = 'https://bubbletea.cool/'
+languageCode = 'zh-tw'
+title = 'BUBBLETEA'
+disableKinds = ['taxonomy', 'term']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "給資料記者提案調查、互動與視覺化報導的編輯室入口。"
+  author = "BUBBLETEA Editorial"
+  pitchEmail = "pitch@bubbletea.cool"
+
+[menus]
+  [[menus.main]]
+    name = "提案方式"
+    url = "#how"
+    weight = 10
+  [[menus.main]]
+    name = "我們想收"
+    url = "#brief"
+    weight = 20
+  [[menus.main]]
+    name = "送出提案"
+    url = "#pitch-form"
+    weight = 30

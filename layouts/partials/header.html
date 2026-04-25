@@ -1,0 +1,20 @@
+<header class="site-header">
+  <a class="skip-link" href="#pitch-form">跳到提案表單</a>
+  <div class="nav-container">
+    <a href="{{ "" | relURL }}" class="brand" aria-label="BUBBLETEA 首頁">
+      <span class="brand-mark" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </span>
+      <span class="brand-word">bubbletea.cool</span>
+    </a>
+
+    <nav class="nav-links" aria-label="主選單">
+      {{ range site.Menus.main }}
+      <a href="{{ .URL }}">{{ .Name }}</a>
+      {{ end }}
+    </nav>
+
+    <a class="nav-action" href="#pitch-form">Pitch</a>
+  </div>
+</header>

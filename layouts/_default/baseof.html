@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode | default "zh-tw" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ block "title" . }}{{ if .IsHome }}{{ site.Title }} | 資料報導提案入口{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} | 資料報導提案入口{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ "images/pitch-desk.png" | absURL }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="{{ "images/logo.svg" | relURL }}" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  {{ block "head" . }}{{ end }}
+</head>
+<body>
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+  {{ partial "header.html" . }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ block "scripts" . }}{{ end }}
+</body>
+</html>
