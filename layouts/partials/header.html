@@ -2,19 +2,23 @@
   <a class="skip-link" href="#pitch-form">跳到提案表單</a>
   <div class="nav-container">
     <a href="{{ "" | relURL }}" class="brand" aria-label="BUBBLETEA 首頁">
-      <span class="brand-mark" aria-hidden="true">
-        <span></span>
-        <span></span>
-      </span>
-      <span class="brand-word">bubbletea.cool</span>
+      {{/* BrandMark: four overlapping role-color pearls, viewBox matches master geometry */}}
+      <svg class="brand-mark-svg" viewBox="0 0 104 96" aria-hidden="true" focusable="false">
+        <ellipse cx="27" cy="16" rx="21" ry="16" fill="var(--engineer)" transform="rotate(-6,27,16)"/>
+        <ellipse cx="61" cy="39" rx="23" ry="17" fill="var(--reader)"   transform="rotate(4,61,39)"/>
+        <ellipse cx="27" cy="63" rx="27" ry="19" fill="var(--designer)" opacity=".55" transform="rotate(-3,27,63)"/>
+        <ellipse cx="53" cy="76" rx="23" ry="16" fill="var(--reporter)" transform="rotate(-1,53,76)"/>
+      </svg>
+      <span class="brand-word">bubbletea<span class="brand-dot">.</span>cool</span>
     </a>
 
     <nav class="nav-links" aria-label="主選單">
-      {{ range site.Menus.main }}
-      <a href="{{ .URL }}">{{ .Name }}</a>
-      {{ end }}
+      <a href="#stories" class="active">最新</a>
+      <a href="#brief">資料調查</a>
+      <a href="#how">互動專題</a>
+      <a href="#pitch-form">編輯室</a>
     </nav>
 
-    <a class="nav-action" href="#pitch-form">Pitch</a>
+    <a class="nav-action" href="#pitch-form">送出提案 →</a>
   </div>
 </header>

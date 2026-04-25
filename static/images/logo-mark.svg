@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="bubbletea.cool">
+  
+  <rect x="2" y="2" width="116" height="116" rx="22" fill="#FFF7E4" stroke="#100C0A" stroke-width="4"></rect>
+  
+  <circle cx="38" cy="46" r="14" fill="#FF2E88" stroke="#100C0A" stroke-width="3"></circle>  
+  <circle cx="78" cy="42" r="13" fill="#00C2FF" stroke="#100C0A" stroke-width="3"></circle>  
+  <circle cx="44" cy="80" r="13" fill="#FFD400" stroke="#100C0A" stroke-width="3"></circle>  
+  <circle cx="82" cy="78" r="14" fill="#6FE83A" stroke="#100C0A" stroke-width="3"></circle>  
+  
+  <path d="M82 16 L98 28" stroke="#100C0A" stroke-width="6" stroke-linecap="round"></path>
+  <path d="M82 16 L98 28" stroke="#FF2E88" stroke-width="2" stroke-linecap="round"></path>
+</svg>

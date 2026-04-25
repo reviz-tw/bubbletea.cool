@@ -1,12 +1,20 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <a href="{{ "" | relURL }}" class="footer-brand">bubbletea.cool</a>
-      <p>資料報導、互動敘事與公共議題的提案入口。</p>
+      <div class="footer-brand-wrap">
+        <svg viewBox="0 0 104 96" width="33" height="31" aria-hidden="true" focusable="false">
+          <ellipse cx="27" cy="16" rx="21" ry="16" fill="var(--engineer)" transform="rotate(-6,27,16)"/>
+          <ellipse cx="61" cy="39" rx="23" ry="17" fill="var(--reader)"   transform="rotate(4,61,39)"/>
+          <ellipse cx="27" cy="63" rx="27" ry="19" fill="var(--designer)" opacity=".55" transform="rotate(-3,27,63)"/>
+          <ellipse cx="53" cy="76" rx="23" ry="16" fill="var(--reporter)" transform="rotate(-1,53,76)"/>
+        </svg>
+        <span class="footer-brand-name">bubbletea<span class="brand-dot">.</span>cool</span>
+      </div>
+      <p class="footer-tagline">資料報導、互動敘事與公共議題的提案入口。</p>
     </div>
     <div class="footer-meta">
-      <a href="mailto:{{ site.Params.pitchEmail }}">{{ site.Params.pitchEmail }}</a>
-      <span>© {{ now.Year }} BUBBLETEA</span>
+      <a href="mailto:{{ site.Params.pitchEmail }}" class="footer-email">{{ site.Params.pitchEmail }}</a>
+      <span>© {{ now.Year }} BUBBLETEA · Taipei</span>
     </div>
   </div>
 </footer>

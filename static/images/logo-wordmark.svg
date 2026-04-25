@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="bubbletea.cool">
+  
+
+  
+  <g>
+    <circle cx="38" cy="80" r="22" fill="#FF2E88" stroke="#100C0A" stroke-width="4"></circle>
+    <circle cx="78" cy="80" r="22" fill="#00C2FF" stroke="#100C0A" stroke-width="4"></circle>
+    <circle cx="118" cy="80" r="22" fill="#FFD400" stroke="#100C0A" stroke-width="4"></circle>
+    <circle cx="158" cy="80" r="22" fill="#6FE83A" stroke="#100C0A" stroke-width="4"></circle>
+  </g>
+
+  
+  <g transform="translate(196, 0)">
+    
+    <text class="word" x="6" y="106" fill="#100C0A">bubbletea</text>
+    
+    <text class="word" x="0" y="100" fill="#FFF7E4" stroke="#100C0A" stroke-width="3">bubbletea</text>
+    <text class="tld" x="2" y="138" fill="#100C0A">.cool — 資料新聞 / data journalism</text>
+  </g>
+</svg>

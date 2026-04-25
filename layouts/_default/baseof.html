@@ -10,16 +10,36 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="{{ "images/pitch-desk.png" | absURL }}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="{{ "images/logo.svg" | relURL }}" type="image/svg+xml">
+  <link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   {{ block "head" . }}{{ end }}
 </head>
 <body>
   <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
   {{ partial "header.html" . }}
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span><i style="background:var(--designer)"></i>設計師</span>
+      <span><i style="background:var(--engineer)"></i>工程師</span>
+      <span><i style="background:var(--reader)"></i>讀者</span>
+      <span><i style="background:var(--reporter)"></i>記者</span>
+      <span>OPEN PITCH DESK · 提案中</span>
+      <span>WE READ EVERY PITCH</span>
+      <span>TAIPEI · 2024</span>
+      <span><i style="background:var(--designer)"></i>設計師</span>
+      <span><i style="background:var(--engineer)"></i>工程師</span>
+      <span><i style="background:var(--reader)"></i>讀者</span>
+      <span><i style="background:var(--reporter)"></i>記者</span>
+      <span>OPEN PITCH DESK · 提案中</span>
+      <span>WE READ EVERY PITCH</span>
+      <span>TAIPEI · 2024</span>
+    </div>
+  </div>
+
   <main>
     {{ block "main" . }}{{ end }}
   </main>
