@@ -164,7 +164,14 @@
     </div>
   </div>
 
-  <form class="pitch-form sr" data-delay="1" id="pitchForm" action="mailto:{{ site.Params.pitchEmail }}" method="post" enctype="text/plain">
+  {{/* Endpoint injected from hugo.toml → params.formEndpoint (Formspree URL).
+       action="#" prevents any native browser form submission; JS handles everything. */}}
+  <form class="pitch-form sr" data-delay="1" id="pitchForm"
+        data-endpoint="{{ site.Params.formEndpoint }}"
+        data-email="{{ site.Params.pitchEmail }}"
+        action="#"
+        method="post"
+        novalidate>
     <label>
       <span>你的名字</span>
       <input name="name" type="text" autocomplete="name" required>
@@ -179,7 +186,7 @@
     </label>
     <label class="full">
       <span>一句話說明這個故事</span>
-      <textarea name="summary" rows="3"></textarea>
+      <textarea name="summary" rows="3" required></textarea>
     </label>
     <label class="full">
       <span>資料來源或你已掌握的線索</span>
@@ -194,8 +201,8 @@
         <option>完整專題製作</option>
       </select>
     </label>
-    <button class="submit-btn" type="submit">送出提案 →</button>
-    <p class="form-status" role="status" aria-live="polite"></p>
+    <button class="submit-btn" type="submit" id="pitchSubmit">送出提案 →</button>
+    <p class="form-status" role="status" aria-live="polite" id="pitchStatus"></p>
   </form>
 </section>
 
@@ -204,7 +211,7 @@
 {{ define "scripts" }}
 <script>
 (function () {
-  /* Scroll progress bar */
+  /* ── Scroll progress bar ── */
   var bar = document.getElementById('progressBar');
   if (bar) {
     function updateBar() {
@@ -216,7 +223,7 @@
     updateBar();
   }
 
-  /* Section reveal */
+  /* ── Section reveal ── */
   var els = document.querySelectorAll('.sr');
   if (els.length && 'IntersectionObserver' in window) {
     var obs = new IntersectionObserver(function (entries) {
@@ -232,14 +239,86 @@
     els.forEach(function (el) { el.classList.add('visible'); });
   }
 
-  /* Form feedback */
-  var form = document.querySelector('#pitchForm');
-  var status = document.querySelector('.form-status');
-  if (form && status) {
-    form.addEventListener('submit', function () {
-      status.textContent = '正在開啟你的 email 程式，表單內容會放進草稿。';
-    });
+  /* ── Pitch form — AJAX submission ── */
+  var form     = document.getElementById('pitchForm');
+  var btn      = document.getElementById('pitchSubmit');
+  var status   = document.getElementById('pitchStatus');
+  if (!form) return;
+
+  var endpoint = form.dataset.endpoint || '';
+  var email    = form.dataset.email    || '';
+
+  function setStatus(msg, color) {
+    status.textContent = msg;
+    status.style.color = color || '';
   }
+
+  function validate() {
+    var name    = form.querySelector('[name="name"]').value.trim();
+    var mail    = form.querySelector('[name="email"]').value.trim();
+    var title   = form.querySelector('[name="title"]').value.trim();
+    var summary = form.querySelector('[name="summary"]').value.trim();
+    if (!name)    { setStatus('請填寫你的名字。', 'var(--danger)'); return false; }
+    if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+      setStatus('請填寫有效的 Email。', 'var(--danger)'); return false;
+    }
+    if (!title)   { setStatus('請填寫提案標題。', 'var(--danger)'); return false; }
+    if (!summary) { setStatus('請簡短說明這個故事。', 'var(--danger)'); return false; }
+    return true;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    if (endpoint) {
+      /* ── Formspree (or any JSON endpoint) ── */
+      btn.disabled = true;
+      btn.textContent = '送出中…';
+      setStatus('');
+
+      var data = {};
+      new FormData(form).forEach(function (val, key) { data[key] = val; });
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function (res) {
+        return res.json().then(function (body) { return { ok: res.ok, body: body }; });
+      })
+      .then(function (r) {
+        if (r.ok) {
+          form.reset();
+          btn.textContent = '✓ 已收到！';
+          setStatus('收到了！我們會在 5 個工作天內回覆你。', 'var(--reporter-ink)');
+        } else {
+          throw new Error((r.body && r.body.error) || '送出失敗');
+        }
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = '送出提案 →';
+        setStatus('送出失敗，請直接寄信至 ' + email + '（' + err.message + '）', 'var(--danger)');
+      });
+
+    } else {
+      /* ── No endpoint — open mailto via JS (no browser warning) ── */
+      var fields  = [
+        ['名字', form.querySelector('[name="name"]').value],
+        ['Email', form.querySelector('[name="email"]').value],
+        ['提案標題', form.querySelector('[name="title"]').value],
+        ['故事說明', form.querySelector('[name="summary"]').value],
+        ['資料來源', form.querySelector('[name="data"]').value],
+        ['協作方式', form.querySelector('[name="support"]').value],
+      ];
+      var body = fields.map(function (f) { return f[0] + '：' + f[1]; }).join('\n');
+      var subject = encodeURIComponent('[提案] ' + form.querySelector('[name="title"]').value);
+      window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+      setStatus('正在開啟你的 email 程式…', '');
+    }
+  });
 })();
 </script>
 {{ end }}

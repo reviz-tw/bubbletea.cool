@@ -41,6 +41,10 @@
   --fs-small:   14px;
   --fs-eyebrow: 12px;
 
+  /* Semantic */
+  --danger:  #E62A2A;
+  --success: var(--reporter);
+
   /* Shape */
   --r-sm:  6px;
   --r-md:  10px;
