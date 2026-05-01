@@ -1,20 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="bubbletea.cool">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160" role="img" aria-label="phangbit.cool">
   
-
-  
-  <g>
-    <circle cx="38" cy="80" r="22" fill="#FF2E88" stroke="#100C0A" stroke-width="4"></circle>
-    <circle cx="78" cy="80" r="22" fill="#00C2FF" stroke="#100C0A" stroke-width="4"></circle>
-    <circle cx="118" cy="80" r="22" fill="#FFD400" stroke="#100C0A" stroke-width="4"></circle>
-    <circle cx="158" cy="80" r="22" fill="#6FE83A" stroke="#100C0A" stroke-width="4"></circle>
+  <g transform="translate(60 80)">
+    <g transform="translate(-30 -28) rotate(-3)"><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"></polygon><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#00C2FF"></polygon></g>
+    <g transform="translate(22 -32) rotate(4)"><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"></polygon><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#FFD400"></polygon></g>
+    <g transform="translate(-22 22) rotate(-1)"><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"></polygon><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#FF2E88"></polygon></g>
+    <g transform="translate(30 18) rotate(2)"><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"></polygon><polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#6FE83A"></polygon></g>
   </g>
-
-  
-  <g transform="translate(196, 0)">
-    
-    <text class="word" x="6" y="106" fill="#100C0A">bubbletea</text>
-    
-    <text class="word" x="0" y="100" fill="#FFF7E4" stroke="#100C0A" stroke-width="3">bubbletea</text>
-    <text class="tld" x="2" y="138" fill="#100C0A">.cool — 資料新聞 / data journalism</text>
-  </g>
+  <text class="word" x="160" y="98" font-size="72" fill="#100C0A">phangbit<tspan fill="#FFD400">.</tspan>cool</text>
 </svg>

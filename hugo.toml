@@ -1,6 +1,6 @@
 baseURL = 'https://bubbletea.cool/'
 languageCode = 'zh-tw'
-title = 'BUBBLETEA'
+title = 'PHANGBIT'
 disableKinds = ['taxonomy', 'term']
 
 [markup]
@@ -10,8 +10,11 @@ disableKinds = ['taxonomy', 'term']
 
 [params]
   description = "給資料記者提案調查、互動與視覺化報導的編輯室入口。"
-  author = "BUBBLETEA Editorial"
-  pitchEmail = "pitch@bubbletea.cool"
+  author = "PHANGBIT Editorial"
+  pitchEmail = "pitch@phangbit.cool"
+  # Formspree endpoint — sign up at formspree.io, create a form, paste the ID here.
+  # e.g. "https://formspree.io/f/xyzabcde"
+  formEndpoint = ""
 
 [menus]
   [[menus.main]]
