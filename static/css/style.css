@@ -148,10 +148,8 @@ h1, h2, h3, h4, p {
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(255, 247, 228, 0.92);
+  background: var(--paper);
   border-bottom: var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .nav-container {
@@ -172,11 +170,44 @@ h1, h2, h3, h4, p {
   flex: 0 0 auto;
 }
 
+/* BrandMark box — ink background wrapping the 2×2 honeycomb SVG */
+.brand-mark-box {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: #100C0A;
+  border: 2px solid #100C0A;
+  border-radius: 5px;
+  padding: 3px 4px;
+}
+
 .brand-mark-svg {
-  width: 38px;
-  height: 35px;
+  width: 39px;
+  height: 33px;
   flex: 0 0 auto;
   display: block;
+}
+
+/* Footer size (scale ≈ 0.32) */
+.brand-mark-box--sm {
+  border-radius: 4px;
+  padding: 2px 3px;
+}
+
+.brand-mark-svg--sm {
+  width: 28px;
+  height: 23px;
+}
+
+/* Hero pearl cluster size (scale ≈ 0.7) */
+.brand-mark-box--hero {
+  border-radius: 8px;
+  padding: 5px 6px;
+}
+
+.brand-mark-svg--hero {
+  width: 60px;
+  height: 50px;
 }
 
 .brand-word {
@@ -246,44 +277,69 @@ h1, h2, h3, h4, p {
   box-shadow: 2px 2px 0 var(--ink);
 }
 
-/* ── Marquee ─────────────────────────────────────── */
+/* ── Status strip ────────────────────────────────── */
 
-.marquee {
+.status-strip {
   background: var(--ink);
   color: var(--paper);
-  overflow: hidden;
-  border-bottom: var(--border);
+  border-bottom: 2px solid var(--ink);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
 }
 
-.marquee-track {
+.status-strip-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 10px var(--px);
   display: flex;
-  gap: 48px;
-  padding: 9px 0;
-  white-space: nowrap;
-  animation: marqueeScroll 32s linear infinite;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
 }
 
-.marquee-track span {
+.status-live {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  color: var(--reporter);
 }
 
-.marquee-track i {
+.status-pulse {
+  display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  display: inline-block;
+  background: var(--reporter);
+  box-shadow: 0 0 0 0 rgba(111, 232, 58, 0.7);
+  animation: statusPulse 2.4s ease-out infinite;
   flex: 0 0 auto;
 }
 
-@keyframes marqueeScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.status-sep {
+  opacity: 0.35;
+}
+
+.status-meta {
+  color: rgba(255, 247, 228, 0.7);
+}
+
+.status-meta strong {
+  color: var(--paper);
+}
+
+.status-link {
+  margin-left: auto;
+  color: var(--reader);
+  text-decoration: underline 2px var(--reader);
+  text-underline-offset: 4px;
+}
+
+@keyframes statusPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(111, 232, 58, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(111, 232, 58, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(111, 232, 58, 0); }
 }
 
 /* ── Hero ────────────────────────────────────────── */
@@ -675,6 +731,100 @@ h1, h2, h3, h4, p {
   max-width: 720px;
 }
 
+/* ── Story feed section ──────────────────────────── */
+
+.stories-section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 60px var(--px);
+  border-top: var(--border);
+}
+
+.stories-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.stories-header h2 {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: var(--fs-h2);
+  line-height: 1.16;
+  margin: 10px 0 0;
+}
+
+.stories-more {
+  font-weight: 900;
+  font-size: 14px;
+  color: var(--ink);
+  text-decoration: underline 3px var(--designer);
+  text-underline-offset: 6px;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.stories-more:hover {
+  opacity: 0.7;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.story-card {
+  border: var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--paper-soft);
+  display: flex;
+  flex-direction: column;
+}
+
+.story-card-stripe {
+  height: 8px;
+  flex: 0 0 auto;
+}
+
+.story-card-body {
+  padding: 16px 18px 20px;
+}
+
+.story-pearls {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pearl {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  flex: 0 0 auto;
+  display: inline-block;
+}
+
+.story-card h3 {
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.story-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
 /* ── Pitch form section ──────────────────────────── */
 
 .form-section {
@@ -899,6 +1049,10 @@ h1, h2, h3, h4, p {
   .roles-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 880px) {
@@ -950,6 +1104,18 @@ h1, h2, h3, h4, p {
     grid-template-columns: 1fr;
   }
 
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .status-strip-inner {
+    gap: 12px;
+  }
+
+  .status-link {
+    margin-left: 0;
+  }
+
   .pitch-form {
     grid-template-columns: 1fr;
     box-shadow: 6px 6px 0 var(--designer);
@@ -986,7 +1152,7 @@ h1, h2, h3, h4, p {
     transform: none !important;
   }
 
-  .marquee-track {
+  .status-pulse {
     animation: none !important;
   }
 

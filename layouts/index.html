@@ -23,26 +23,16 @@
     <div class="hero-frame-offset"></div>
     <img src="{{ "images/pitch-desk.png" | relURL }}" alt="放著圖表、筆記、筆電與珍珠奶茶的資料報導提案工作桌">
     <div class="hero-stamp" aria-hidden="true">EST. 2024 · TAIPEI</div>
-    {{/* Hexagon pearl cluster overlapping bottom-left — BrandMark at scale 0.7 */}}
+    {{/* BrandMark pearl cluster overlapping bottom-left — flat 2×2 honeycomb at scale 0.7 */}}
     <div class="hero-pearl-cluster" aria-hidden="true">
-      <svg viewBox="0 0 120 108" width="84" height="76">
-        <g transform="translate(30 32) rotate(-3)">
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"/>
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="var(--engineer)"/>
-        </g>
-        <g transform="translate(82 28) rotate(4)">
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"/>
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="var(--reader)"/>
-        </g>
-        <g transform="translate(38 78) rotate(-1)">
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"/>
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="var(--designer)"/>
-        </g>
-        <g transform="translate(90 80) rotate(2)">
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="#100C0A" transform="scale(1.15)"/>
-          <polygon points="-26,-15 0,-30 26,-15 26,15 0,30 -26,15" fill="var(--reporter)"/>
-        </g>
-      </svg>
+      <span class="brand-mark-box brand-mark-box--hero">
+        <svg class="brand-mark-svg brand-mark-svg--hero" viewBox="-4 -4 77.28 64" aria-hidden="true" focusable="false">
+          <polygon points="13.86,0 27.71,8 27.71,24 13.86,32 0,24 0,8" fill="#00C2FF" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+          <polygon points="41.57,0 55.43,8 55.43,24 41.57,32 27.71,24 27.71,8" fill="#FFD400" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+          <polygon points="27.71,24 41.57,32 41.57,48 27.71,56 13.86,48 13.86,32" fill="#FF2E88" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+          <polygon points="55.43,24 69.28,32 69.28,48 55.43,56 41.57,48 41.57,32" fill="#6FE83A" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
   </figure>
 </section>
@@ -162,6 +152,54 @@
       </div>
     </li>
   </ol>
+</section>
+
+{{/* ── Story Feed ───────────────────────────────────── */}}
+<section class="stories-section" id="stories">
+  <div class="stories-header sr">
+    <div>
+      <p class="eyebrow">RECENT STORIES · 近期專題</p>
+      <h2>最近我們做了什麼</h2>
+    </div>
+    <a href="#" class="stories-more">看全部 →</a>
+  </div>
+  <div class="stories-grid">
+    <article class="story-card sr" data-delay="1">
+      <div class="story-card-stripe" style="background:var(--designer)"></div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--designer)"></span>
+          <span class="pearl" style="background:var(--engineer)"></span>
+          <span class="pearl" style="background:var(--reader)"></span>
+        </div>
+        <h3>租屋黑洞地圖：哪些縣市最難被看見？</h3>
+        <div class="story-meta">2024.11.04 · 互動解釋</div>
+      </div>
+    </article>
+    <article class="story-card sr" data-delay="2">
+      <div class="story-card-stripe" style="background:var(--reporter)"></div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--reader)"></span>
+          <span class="pearl" style="background:var(--reporter)"></span>
+        </div>
+        <h3>夜市攤車的數位帳本，藏著什麼？</h3>
+        <div class="story-meta">2024.10.18 · 資料調查</div>
+      </div>
+    </article>
+    <article class="story-card sr" data-delay="3">
+      <div class="story-card-stripe" style="background:var(--engineer)"></div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--designer)"></span>
+          <span class="pearl" style="background:var(--engineer)"></span>
+          <span class="pearl" style="background:var(--reader)"></span>
+        </div>
+        <h3>你家旁邊的工廠：環保稽查 10 年資料庫</h3>
+        <div class="story-meta">2024.09.22 · 視覺化</div>
+      </div>
+    </article>
+  </div>
 </section>
 
 {{/* ── Pitch Form ───────────────────────────────────── */}}
