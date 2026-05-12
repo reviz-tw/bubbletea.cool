@@ -1,0 +1,213 @@
+{{/* Article single-page layout — matches Phang-Bit design article.html.
+     The status-strip is gated to .IsHome in baseof, so no override is needed here. */}}
+
+{{ define "main" }}
+<article>
+  <header class="article-hero">
+    {{ with .Params.tags }}
+    <div class="article-tag-row">
+      {{ range . }}
+      <span class="article-tag{{ with .role }} article-tag--{{ . }}{{ end }}">{{ .label }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+
+    <h1 class="article-h1">{{ .Title }}</h1>
+
+    {{ with .Description }}<p class="article-dek">{{ . | safeHTML }}</p>{{ end }}
+
+    {{ with .Params.byline }}
+    <div class="article-byline">
+      {{ with .by }}
+      <div class="article-byline-block">
+        <div class="by-label">BY</div>
+        <div class="by-name">{{ . }}</div>
+      </div>
+      {{ end }}
+      {{ with .published }}
+      <div class="article-byline-block">
+        <div class="by-label">PUBLISHED</div>
+        <div class="by-name">{{ . }}</div>
+      </div>
+      {{ end }}
+      {{ with .reading }}
+      <div class="article-byline-block">
+        <div class="by-label">READING</div>
+        <div class="by-name">{{ . }}</div>
+      </div>
+      {{ end }}
+      {{ with .contributors }}
+      <div class="article-byline-block">
+        <div class="by-label">CONTRIBUTORS</div>
+        <div class="by-name">{{ . }}</div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+
+  {{ with .Params.cover }}
+  <div class="article-cover">
+    <div class="article-cover-frame">
+      {{ with .stamp }}<span class="article-cover-stamp">{{ . }}</span>{{ end }}
+      {{ if .image }}
+        <img src="{{ .image | relURL }}" alt="{{ .alt | default "" }}">
+      {{ else if .caption }}
+        <span class="placeholder-label">{{ .caption | safeHTML }}</span>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  <div class="article-body">
+    {{ .Content }}
+  </div>
+
+  {{/* Embedded pitch form — same fields and JS hook as the homepage. */}}
+  <section class="embedded-pitch" id="pitch-form">
+    <div class="embedded-pitch-wrap">
+      <div>
+        <p class="eyebrow">PITCH FORM</p>
+        <h2>送出你的<br>資料報導提案</h2>
+        <p>不用等到資料百分之百完整才來。先把問題意識、已知資料、可能風險和你需要的協作寫清楚。</p>
+        <div class="pitch-note">
+          <strong>建議準備</strong>
+          <span>題目摘要、資料來源連結、初步發現、採訪對象、預估時程。</span>
+        </div>
+      </div>
+
+      <form class="pitch-form" id="pitchForm"
+            data-endpoint="{{ site.Params.formEndpoint }}"
+            data-email="{{ site.Params.pitchEmail }}"
+            action="#"
+            method="post"
+            novalidate>
+        <label>
+          <span>你的名字</span>
+          <input name="name" type="text" autocomplete="name" required>
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+        <label class="full">
+          <span>提案標題</span>
+          <input name="title" type="text" placeholder="例如：哪些縣市的租屋黑洞最難被看見？" required>
+        </label>
+        <label class="full">
+          <span>一句話說明這個故事</span>
+          <textarea name="summary" rows="3" required></textarea>
+        </label>
+        <label class="full">
+          <span>資料來源或你已掌握的線索</span>
+          <textarea name="data" rows="3"></textarea>
+        </label>
+        <label class="full">
+          <span>希望 PHANGBIT 怎麼協作？</span>
+          <select name="support">
+            <option>編輯討論與題目打磨</option>
+            <option>資料清理與分析</option>
+            <option>視覺化與互動設計</option>
+            <option>完整專題製作</option>
+          </select>
+        </label>
+        <button class="submit-btn" type="submit" id="pitchSubmit">送出提案 →</button>
+        <p class="form-status" role="status" aria-live="polite" id="pitchStatus"></p>
+      </form>
+    </div>
+  </section>
+</article>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+(function () {
+  var bar = document.getElementById('progressBar');
+  if (bar) {
+    function updateBar() {
+      var s = window.scrollY;
+      var t = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = t > 0 ? (s / t * 100) + '%' : '0%';
+    }
+    window.addEventListener('scroll', updateBar, { passive: true });
+    updateBar();
+  }
+
+  var form   = document.getElementById('pitchForm');
+  var btn    = document.getElementById('pitchSubmit');
+  var status = document.getElementById('pitchStatus');
+  if (!form) return;
+
+  var endpoint = form.dataset.endpoint || '';
+  var email    = form.dataset.email    || '';
+
+  function setStatus(msg, color) {
+    status.textContent = msg;
+    status.style.color = color || '';
+  }
+
+  function validate() {
+    var name    = form.querySelector('[name="name"]').value.trim();
+    var mail    = form.querySelector('[name="email"]').value.trim();
+    var title   = form.querySelector('[name="title"]').value.trim();
+    var summary = form.querySelector('[name="summary"]').value.trim();
+    if (!name)    { setStatus('請填寫你的名字。', 'var(--danger)'); return false; }
+    if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+      setStatus('請填寫有效的 Email。', 'var(--danger)'); return false;
+    }
+    if (!title)   { setStatus('請填寫提案標題。', 'var(--danger)'); return false; }
+    if (!summary) { setStatus('請簡短說明這個故事。', 'var(--danger)'); return false; }
+    return true;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    if (endpoint) {
+      btn.disabled = true;
+      btn.textContent = '送出中…';
+      setStatus('');
+
+      var data = {};
+      new FormData(form).forEach(function (val, key) { data[key] = val; });
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function (res) { return res.json().then(function (body) { return { ok: res.ok, body: body }; }); })
+      .then(function (r) {
+        if (r.ok) {
+          form.reset();
+          btn.textContent = '✓ 已收到！';
+          setStatus('收到了！我們會在 5 個工作天內回覆你。', 'var(--reporter-ink)');
+        } else {
+          throw new Error((r.body && r.body.error) || '送出失敗');
+        }
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = '送出提案 →';
+        setStatus('送出失敗，請直接寄信至 ' + email + '（' + err.message + '）', 'var(--danger)');
+      });
+
+    } else {
+      var fields  = [
+        ['名字', form.querySelector('[name="name"]').value],
+        ['Email', form.querySelector('[name="email"]').value],
+        ['提案標題', form.querySelector('[name="title"]').value],
+        ['故事說明', form.querySelector('[name="summary"]').value],
+        ['資料來源', form.querySelector('[name="data"]').value],
+        ['協作方式', form.querySelector('[name="support"]').value],
+      ];
+      var body = fields.map(function (f) { return f[0] + '：' + f[1]; }).join('\n');
+      var subject = encodeURIComponent('[提案] ' + form.querySelector('[name="title"]').value);
+      window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+      setStatus('正在開啟你的 email 程式…', '');
+    }
+  });
+})();
+</script>
+{{ end }}

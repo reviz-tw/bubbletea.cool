@@ -21,16 +21,8 @@
   <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
   {{ partial "header.html" . }}
 
-  <div class="status-strip">
-    <div class="status-strip-inner">
-      <span class="status-live"><i class="status-pulse"></i> OPEN PITCH DESK · 提案中</span>
-      <span class="status-sep">/</span>
-      <span class="status-meta">本期截稿　<strong>2026.05.31</strong></span>
-      <span class="status-sep">/</span>
-      <span class="status-meta">已收提案　<strong>47 件</strong></span>
-      <a class="status-link" href="#stories">看看上期的成果 →</a>
-    </div>
-  </div>
+  {{/* status-strip shows on the homepage only; single pages opt out via layout. */}}
+  {{ if .IsHome }}{{ partial "status-strip.html" . }}{{ end }}
 
   <main>
     {{ block "main" . }}{{ end }}
