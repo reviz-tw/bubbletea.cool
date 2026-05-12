@@ -1,5 +1,5 @@
 <header class="site-header">
-  <a class="skip-link" href="#pitch-form">跳到提案表單</a>
+  <a class="skip-link" href="#main">跳到主要內容</a>
   <div class="nav-container">
     <a href="{{ "" | relURL }}" class="brand" aria-label="PHANGBIT 首頁">
       {{/* BrandMark: flat 2×2 honeycomb, ink background box */}}
@@ -14,13 +14,15 @@
       <span class="brand-word">phangbit<span class="brand-dot">.</span>cool</span>
     </a>
 
+    {{/* Active state is decided by URL prefix match against the current page. */}}
+    {{ $current := .RelPermalink }}
     <nav class="nav-links" aria-label="主選單">
-      <a href="#stories" class="active">最新</a>
-      <a href="#brief">資料調查</a>
-      <a href="#how">互動專題</a>
-      <a href="#pitch-form">編輯室</a>
+      <a href="{{ "" | relURL }}"{{ if eq $current "/" }} class="active"{{ end }}>最新</a>
+      <a href="{{ "stories/" | relURL }}"{{ if hasPrefix $current "/stories" }} class="active"{{ end }}>報導</a>
+      <a href="{{ "about/" | relURL }}"{{ if hasPrefix $current "/about" }} class="active"{{ end }}>關於我們</a>
+      <a href="{{ "about/#team" | relURL }}">編輯室</a>
     </nav>
 
-    <a class="nav-action" href="#pitch-form">送出提案 →</a>
+    <a class="nav-action" href="{{ "article/#pitch-form" | relURL }}">送出提案 →</a>
   </div>
 </header>

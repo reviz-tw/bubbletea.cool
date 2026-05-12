@@ -28,6 +28,7 @@
     {{ block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
+  <script src="{{ "js/site.js" | relURL }}" defer></script>
   {{ block "scripts" . }}{{ end }}
 </body>
 </html>
