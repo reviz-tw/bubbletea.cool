@@ -122,17 +122,7 @@
 {{ define "scripts" }}
 <script>
 (function () {
-  var bar = document.getElementById('progressBar');
-  if (bar) {
-    function updateBar() {
-      var s = window.scrollY;
-      var t = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = t > 0 ? (s / t * 100) + '%' : '0%';
-    }
-    window.addEventListener('scroll', updateBar, { passive: true });
-    updateBar();
-  }
-
+  /* Progress bar + .sr reveal are handled by /js/site.js (shared). */
   var form   = document.getElementById('pitchForm');
   var btn    = document.getElementById('pitchSubmit');
   var status = document.getElementById('pitchStatus');

@@ -1,49 +1,286 @@
+{{/* Homepage — Phang-Bit design index.html.
+     Pitch form lives on /article/; this page links to it. */}}
+
 {{ define "main" }}
 
-{{/* ── Hero ─────────────────────────────────────────── */}}
-<section class="hero" id="top">
-  <div>
-    <p class="eyebrow sr">OPEN PITCH DESK · 提案中</p>
-    <h1 class="sr" data-delay="1">
-      把資料裡<br>
-      那個還沒被<br>
-      說清楚的<span class="highlight-word">故事</span><br>
-      提案給我們。
-    </h1>
-    <p class="hero-lede sr" data-delay="2">
-      phâng-bi̍t 正在收資料記者的報導提案：調查、解釋型新聞、互動圖表、地圖、資料庫專題，或任何需要用資料把公共議題講明白的作品。
-    </p>
-    <div class="hero-actions sr" data-delay="3">
-      <a class="btn btn-primary" href="#pitch-form">開始提案 →</a>
-      <a class="btn btn-secondary" href="#brief">看提案格式</a>
+{{/* ── Hero — Editor's Picks Cover ─────────────────── */}}
+<section class="hero-edpick" data-screen-label="hero / editor's picks">
+  <div class="hero-edpick-head">
+    <div class="sr">
+      <div class="hero-issue-line">
+        <span class="hero-issue-no">ISSUE 001</span>
+        <span>2026 · 05 · 12</span>
+        <span class="hero-issue-divider"></span>
+        <span>編輯精選 · 5 篇</span>
+      </div>
+      <h1>
+        把資料裡<br>
+        還沒被說清楚的<br>
+        <span class="accent">故事</span>，<br>
+        講給該聽的人聽。
+      </h1>
+    </div>
+    <div class="sr" data-delay="2">
+      <p class="hero-edpick-tagline">
+        phâng-bi̍t 是一個 2026 創辦的資料新聞網站。我們做調查報導、互動圖表、可被讀者操作的資料庫。
+      </p>
+      <div class="hero-edpick-actions">
+        <a class="btn btn-primary" href="{{ "stories/" | relURL }}">看所有報導 →</a>
+        <a class="btn btn-secondary" href="{{ "article/" | relURL }}">為什麼做這個？</a>
+      </div>
     </div>
   </div>
 
-  <figure class="hero-media sr" data-delay="2">
-    <div class="hero-frame-offset"></div>
-    <img src="{{ "images/pitch-desk.png" | relURL }}" alt="放著圖表、筆記、筆電與珍珠奶茶的資料報導提案工作桌">
-    <div class="hero-stamp" aria-hidden="true">Data Journalism</div>
-    {{/* BrandMark pearl cluster overlapping bottom-left — flat 2×2 honeycomb at scale 0.7 */}}
-    <div class="hero-pearl-cluster" aria-hidden="true">
-      <span class="brand-mark-box brand-mark-box--hero">
-        <svg class="brand-mark-svg brand-mark-svg--hero" viewBox="-4 -4 77.28 64" aria-hidden="true" focusable="false">
-          <polygon points="13.86,0 27.71,8 27.71,24 13.86,32 0,24 0,8" fill="#00C2FF" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
-          <polygon points="41.57,0 55.43,8 55.43,24 41.57,32 27.71,24 27.71,8" fill="#FFD400" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
-          <polygon points="27.71,24 41.57,32 41.57,48 27.71,56 13.86,48 13.86,32" fill="#FF2E88" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
-          <polygon points="55.43,24 69.28,32 69.28,48 55.43,56 41.57,48 41.57,32" fill="#6FE83A" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
-        </svg>
-      </span>
+  {{/* Featured grid: 1 large + 2 stacked */}}
+  <div class="hero-feature-grid">
+    <a class="feature-card feature-card--lg sr" href="{{ "article/" | relURL }}" data-delay="1">
+      <div class="feature-card-image feature-card-image--reader">
+        <span class="feature-card-tag feature-card-tag--pink">編輯室 · 創刊</span>
+        <span class="placeholder-label">[ COVER ART · 創刊號封面插畫<br>建議：手繪 + 資料圖表混合 ]</span>
+        <div class="feature-card-pearls">
+          <span class="pearl" style="background:var(--designer)"></span>
+          <span class="pearl" style="background:var(--engineer)"></span>
+          <span class="pearl" style="background:var(--reader)"></span>
+          <span class="pearl" style="background:var(--reporter)"></span>
+        </div>
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-card-meta">
+          <span>編輯室筆記</span><span class="dot"></span><span>20 分鐘閱讀</span><span class="dot"></span><span>2026.05.12</span>
+        </div>
+        <h2 class="feature-card-title">
+          為什麼我們要做一個資料新聞網站？<br>而且為什麼是 2026。
+        </h2>
+        <p class="feature-card-dek">
+          我們相信還有一些公共議題，沒有被資料好好看見過。創刊宣言，以及給資料記者的提案邀請。
+        </p>
+        <div class="feature-card-byline">by 編輯室 · 林宛俞、陳家瑋、Aki Tanaka</div>
+      </div>
+    </a>
+
+    <div class="feature-stack">
+      <a class="feature-card sr" href="{{ "stories/" | relURL }}" data-delay="2">
+        <div class="feature-card-image feature-card-image--designer">
+          <span class="feature-card-tag feature-card-tag--yellow">資料調查</span>
+          <span class="placeholder-label">[ HERO VIZ · 互動地圖縮圖<br>建議：650×360 截圖或 lottie ]</span>
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-card-meta"><span>調查報導</span><span class="dot"></span><span>2026.05.10</span></div>
+          <h3 class="feature-card-title">租屋黑洞：哪些縣市的押金條款最難說清楚？</h3>
+          <div class="feature-card-byline">資料：陳家瑋 · 視覺：Aki Tanaka</div>
+        </div>
+      </a>
+      <a class="feature-card sr" href="{{ "stories/" | relURL }}" data-delay="3">
+        <div class="feature-card-image feature-card-image--ink">
+          <span class="feature-card-tag feature-card-tag--green">互動專題</span>
+          <span class="placeholder-label">[ DARK MODE VIZ · 夜間版互動圖<br>建議：抽象資料線條動畫 ]</span>
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-card-meta"><span>互動解釋</span><span class="dot"></span><span>2026.05.06</span></div>
+          <h3 class="feature-card-title">把你家的電費，丟進過去十年的尖峰時段看看？</h3>
+          <div class="feature-card-byline">工程：張子衡 · 編輯：林宛俞</div>
+        </div>
+      </a>
     </div>
-  </figure>
+  </div>
 </section>
 
-{{/* ── Roles ────────────────────────────────────────── */}}
-<section class="roles" id="roles">
+{{/* ── Manifesto strip ─────────────────────────────── */}}
+<section class="manifesto-strip" data-screen-label="manifesto">
+  <div class="manifesto-inner">
+    <p class="eyebrow">EDITORIAL · 創刊宣言</p>
+    <h2>
+      我們做的不是「資料漂亮的新聞」，<br>
+      是「<span class="u">用資料把公共議題講清楚</span>」的新聞。
+    </h2>
+    <p>
+      台灣有太多公共議題卡在「沒有資料」「資料看不懂」「資料只能看不能用」這三層牆裡。phâng-bi̍t 想拆掉這幾層。我們做能讓讀者把自己丟進去比對、可以追問、能驗算的報導。
+    </p>
+    <div class="manifesto-cta">
+      <a class="btn btn-pink" href="{{ "article/" | relURL }}">讀完整宣言 →</a>
+    </div>
+  </div>
+</section>
+
+{{/* ── Stories grid ────────────────────────────────── */}}
+<section class="stories-section" id="stories" data-screen-label="stories grid">
+  <div class="stories-header sr">
+    <div>
+      <p class="eyebrow">LATEST · 最新報導</p>
+      <h2>最近在做的題目</h2>
+    </div>
+    <a class="stories-more" href="{{ "stories/" | relURL }}">全部報導 →</a>
+  </div>
+
+  <div class="chip-row" style="margin-bottom: 24px;">
+    <span class="chip active">全部 <span class="chip-count">12</span></span>
+    <span class="chip">資料調查 <span class="chip-count">5</span></span>
+    <span class="chip">互動專題 <span class="chip-count">4</span></span>
+    <span class="chip">視覺化 <span class="chip-count">2</span></span>
+    <span class="chip">編輯室 <span class="chip-count">1</span></span>
+  </div>
+
+  <div class="stories-grid">
+    <article class="story-card sr" tabindex="0" data-delay="1">
+      <div class="story-card-stripe" style="background:var(--designer)"></div>
+      <div class="story-card-thumb story-card-thumb--designer">
+        <span class="placeholder-label">[ THUMB · 租屋押金資料圖<br>建議：650×400 統計圖 ]</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--designer)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+        </div>
+        <h3>租屋黑洞：哪些縣市的押金條款最難說清楚？</h3>
+        <div class="story-meta">
+          <span>調查 · DATA</span><span class="dot"></span><span>14 min</span><span class="dot"></span><span>2026.05.10</span>
+        </div>
+        <div class="story-card-extra">
+          我們抓了 2014–2025 全台 12 個縣市的租賃定型化契約檢查結果，配上實際租屋糾紛卷宗，看見一個沒被講清楚的事：違規押金條款的縣市分布，跟你住的地方有關。
+          <div class="extra-meta">
+            <span>by 陳家瑋</span><span>·</span><span>視覺：Aki Tanaka</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card sr" tabindex="0" data-delay="2">
+      <div class="story-card-stripe" style="background:var(--engineer)"></div>
+      <div class="story-card-thumb">
+        <span class="placeholder-label">[ THUMB · 電費互動 viz<br>建議：折線 + 用戶游標標記 ]</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--engineer)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+        </div>
+        <h3>把你家的電費，丟進過去十年的尖峰時段看看？</h3>
+        <div class="story-meta">
+          <span>互動 · 解釋</span><span class="dot"></span><span>8 min</span><span class="dot"></span><span>2026.05.06</span>
+        </div>
+        <div class="story-card-extra">
+          輸入你最近三期的電費單號，網頁會把你的用電行為對照 2015 年以來的尖峰結構。看看你是被高估、低估，還是剛好掉在那條結構線上。
+          <div class="extra-meta">
+            <span>by 張子衡</span><span>·</span><span>編輯：林宛俞</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card sr" tabindex="0" data-delay="3">
+      <div class="story-card-stripe" style="background:var(--reader)"></div>
+      <div class="story-card-thumb story-card-thumb--reader">
+        <span class="placeholder-label">[ THUMB · 補助流向 sankey<br>建議：sankey diagram 截圖 ]</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--reader)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+        </div>
+        <h3>5,800 萬補助，最後流向了哪 32 間機構？</h3>
+        <div class="story-meta">
+          <span>視覺化</span><span class="dot"></span><span>11 min</span><span class="dot"></span><span>2026.04.28</span>
+        </div>
+        <div class="story-card-extra">
+          我們用桑基圖追蹤一個被忽略的小型藝文補助方案，從中央到地方再到受補助單位的金流路徑。途中至少有三個轉手點，誰都沒主動公告過。
+          <div class="extra-meta">
+            <span>by Aki Tanaka</span><span>·</span><span>資料：陳家瑋</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card sr" tabindex="0" data-delay="1">
+      <div class="story-card-stripe" style="background:var(--reporter)"></div>
+      <div class="story-card-thumb story-card-thumb--reporter">
+        <span class="placeholder-label">[ THUMB · 工殤地圖<br>建議：500×400 地圖 + 標點 ]</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--reporter)"></span>
+        </div>
+        <h3>那一年因為高溫倒下的人們：1,234 件工殤紀錄拼成的地圖</h3>
+        <div class="story-meta">
+          <span>調查 · 互動</span><span class="dot"></span><span>22 min</span><span class="dot"></span><span>2026.04.18</span>
+        </div>
+        <div class="story-card-extra">
+          透過勞檢紀錄交叉中央氣象署的歷史氣溫資料，標出每一個被通報的工殤位置。讀者可以拉時間軸，看哪幾個月的暑熱沒被當作風險評估在做。
+          <div class="extra-meta">
+            <span>by 陳家瑋</span><span>·</span><span>工程：張子衡</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card sr" tabindex="0" data-delay="2">
+      <div class="story-card-stripe" style="background:var(--ink)"></div>
+      <div class="story-card-thumb story-card-thumb--designer">
+        <span class="placeholder-label">[ THUMB · 校園空間<br>建議：等高線俯瞰圖示意 ]</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--designer)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--reader)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+        </div>
+        <h3>當校園無障礙坡道，是先給推車還是給輪椅？</h3>
+        <div class="story-meta">
+          <span>資料 · 設計</span><span class="dot"></span><span>13 min</span><span class="dot"></span><span>2026.04.09</span>
+        </div>
+        <div class="story-card-extra">
+          我們拿了 168 間國中小的無障礙設施清冊，配上實地走訪結果，看見「合規」並不等於「能用」。誰決定了那個坡度？
+          <div class="extra-meta">
+            <span>by 林宛俞</span><span>·</span><span>視覺：Aki Tanaka</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="story-card sr" tabindex="0" data-delay="3">
+      <div class="story-card-stripe" style="background:var(--designer)"></div>
+      <div class="story-card-thumb">
+        <span class="placeholder-label">[ THUMB · 計算器 UI<br>建議：螢幕截圖示意 ]</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          <span class="pearl" style="background:var(--designer)"></span>
+          <span class="pearl" style="background:var(--engineer)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+          <span class="pearl" style="background:var(--ink)"></span>
+        </div>
+        <h3>你的薪資漲幅，跑得贏物價嗎？放一張薪資單就知道</h3>
+        <div class="story-meta">
+          <span>互動 · 計算器</span><span class="dot"></span><span>6 min</span><span class="dot"></span><span>2026.03.30</span>
+        </div>
+        <div class="story-card-extra">
+          一張會請你輸入收入的計算器，背後接的是主計總處從 2013 至今的物價指數與行業薪資中位數，輸出你個人化的「實質薪資 vs. 物價」圖。
+          <div class="extra-meta">
+            <span>by 張子衡</span><span>·</span><span>編輯：林宛俞</span>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+{{/* ── Roles ───────────────────────────────────────── */}}
+<section class="roles" id="roles" data-screen-label="roles">
   <div class="section-header sr">
     <div>
       <p class="eyebrow">FOUR PEOPLE · 一篇報導</p>
       <h2>每一篇 phâng-bi̍t 報導，<br>都包含他們的參與。</h2>
     </div>
+    <span class="mono-meta">§01 / 05</span>
   </div>
   <div class="roles-grid">
     <article class="role-card sr" data-delay="1">
@@ -89,16 +326,16 @@
   </div>
 </section>
 
-{{/* ── Brief ────────────────────────────────────────── */}}
-<section class="split-section" id="brief">
+{{/* ── Brief — what we publish ─────────────────────── */}}
+<section class="split-section" id="brief" data-screen-label="what we publish">
   <div class="section-kicker sr">
-    <p class="eyebrow">WHAT TO PITCH</p>
-    <div class="mono-meta">§02 / 04</div>
+    <p class="eyebrow eyebrow--engineer">WHAT WE PUBLISH</p>
+    <span class="mono-meta">§02 / 05</span>
   </div>
   <div>
     <h2 class="section-h2 sr" data-delay="1">
-      我們想收到的不是「我有一份資料」，<br>
-      而是「<span style="background:var(--reader);padding:0 6px;box-shadow:4px 4px 0 var(--ink);display:inline">這份資料</span>能讓誰看見什麼」。
+      我們做的不是「我有一份資料」，<br>
+      而是「<span style="background:var(--reader);padding:0 6px;box-shadow:4px 4px 0 var(--ink);display:inline-block">這份資料</span>能讓誰看見什麼」。
     </h2>
     <div class="brief-grid">
       <article class="brief-card sr" data-delay="1">
@@ -120,21 +357,21 @@
   </div>
 </section>
 
-{{/* ── Process ──────────────────────────────────────── */}}
-<section class="process-section" id="how">
+{{/* ── Process ─────────────────────────────────────── */}}
+<section class="process-section" id="how" data-screen-label="process">
   <div class="process-header sr">
     <div>
-      <p class="eyebrow">HOW IT WORKS</p>
-      <h2>提案後會發生什麼事</h2>
+      <p class="eyebrow">HOW WE WORK · 我們怎麼做</p>
+      <h2>從一個提案到一篇報導，<br>會經過這三件事。</h2>
     </div>
-    <div class="mono-meta">§03 / 04</div>
+    <span class="mono-meta">§03 / 05</span>
   </div>
   <ol class="process-list">
     <li class="process-item sr">
       <span class="process-num" style="background:var(--designer)">1</span>
       <div>
         <h3>送出初稿</h3>
-        <p>用下方表單告訴我們題目、核心問題、資料來源、你目前卡住的地方，以及希望我們怎麼協作。</p>
+        <p>用提案表單告訴我們題目、核心問題、資料來源、你目前卡住的地方，以及希望我們怎麼協作。</p>
       </div>
     </li>
     <li class="process-item sr" data-delay="1">
@@ -154,174 +391,50 @@
   </ol>
 </section>
 
-
-{{/* ── Pitch Form ───────────────────────────────────── */}}
-<section class="form-section" id="pitch-form">
-  <div class="form-copy sr">
-    <p class="eyebrow">PITCH FORM · 04 / 04</p>
-    <h2>送出你的<br>資料報導提案</h2>
-    <p>不用等到資料百分之百完整才來。先把問題意識、已知資料、可能風險和你需要的協作寫清楚。</p>
-    <div class="pitch-note">
-      <strong>建議準備</strong>
-      <span>題目摘要、資料來源連結、初步發現、採訪對象、預估時程。</span>
+{{/* ── Support tier ────────────────────────────────── */}}
+<section class="support-section" id="support" data-screen-label="support">
+  <div class="section-header sr">
+    <div>
+      <p class="eyebrow eyebrow--reporter">SUPPORT · 支持我們</p>
+      <h2>讓 phâng-bi̍t 可以一直做下去</h2>
     </div>
+    <span class="mono-meta">§04 / 05</span>
   </div>
+  <p class="sr" style="max-width: 680px; font-size: 16px; color: var(--ink-soft);" data-delay="1">
+    我們不放廣告、不接置入。報導與資料庫的成本，由讀者、贊助者和合作機構分擔。可以選擇你習慣的支持方式。
+  </p>
 
-  {{/* Endpoint injected from hugo.toml → params.formEndpoint (Formspree URL).
-       action="#" prevents any native browser form submission; JS handles everything. */}}
-  <form class="pitch-form sr" data-delay="1" id="pitchForm"
-        data-endpoint="{{ site.Params.formEndpoint }}"
-        data-email="{{ site.Params.pitchEmail }}"
-        action="#"
-        method="post"
-        novalidate>
-    <label>
-      <span>你的名字</span>
-      <input name="name" type="text" autocomplete="name" required>
-    </label>
-    <label>
-      <span>Email</span>
-      <input name="email" type="email" autocomplete="email" required>
-    </label>
-    <label class="full">
-      <span>提案標題</span>
-      <input name="title" type="text" placeholder="例如：哪些縣市的租屋黑洞最難被看見？" required>
-    </label>
-    <label class="full">
-      <span>一句話說明這個故事</span>
-      <textarea name="summary" rows="3" required></textarea>
-    </label>
-    <label class="full">
-      <span>資料來源或你已掌握的線索</span>
-      <textarea name="data" rows="3"></textarea>
-    </label>
-    <label class="full">
-      <span>希望 PHANGBIT 怎麼協作？</span>
-      <select name="support">
-        <option>編輯討論與題目打磨</option>
-        <option>資料清理與分析</option>
-        <option>視覺化與互動設計</option>
-        <option>完整專題製作</option>
-      </select>
-    </label>
-    <button class="submit-btn" type="submit" id="pitchSubmit">送出提案 →</button>
-    <p class="form-status" role="status" aria-live="polite" id="pitchStatus"></p>
-  </form>
+  <div class="support-grid" style="grid-template-columns: 1fr; margin-top: 32px;">
+    <article class="tier-card tier-featured sr" data-delay="1" style="display: grid; grid-template-columns: minmax(260px, 380px) 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; padding: clamp(28px, 4vw, 44px);">
+      <span class="tier-flag">SUPPORT · 唯一方案</span>
+      <div style="display: flex; flex-direction: column; gap: 18px;">
+        <h3 class="tier-name" style="font-size: 30px;">月訂閱 · 共同編輯</h3>
+        <div class="tier-amount">NT$ 150<span class="tier-amount-period">/ 月</span></div>
+        <p class="tier-desc" style="font-size: 15px;">每個月一杯咖啡的價格，分擔一份不放廣告、不接置入的編輯室。你的支持直接變成資料庫的伺服器費、設計與工程的時數。</p>
+        <a class="tier-cta" href="#" style="margin-top: 4px;">用這個方式支持 →</a>
+        <p style="margin: 0; font-family: var(--font-mono); font-size: 12px; color: rgba(255,247,228,.55); letter-spacing: .04em;">想以基金會 / NGO / 機構名義支持？<a href="mailto:{{ site.Params.pitchEmail }}" style="color: var(--reader); text-decoration: underline; text-underline-offset: 3px;">寫信給編輯室</a>。</p>
+      </div>
+      <ul class="tier-perks" style="gap: 12px;">
+        <li>每雙週電子報，挑一份正在做的資料筆記</li>
+        <li>資料下載權限與方法論說明文件</li>
+        <li>每季線上選題會旁聽</li>
+        <li>下年度題目票選權</li>
+        <li>名字寫進報導鳴謝頁</li>
+      </ul>
+    </article>
+  </div>
 </section>
 
-{{ end }}
+{{/* ── Pitch CTA strip ─────────────────────────────── */}}
+<section class="manifesto-strip" data-screen-label="pitch cta" style="margin-top:0">
+  <div class="manifesto-inner">
+    <p class="eyebrow">PITCH · 給資料記者</p>
+    <h2>你手上有一份還沒被講清楚的資料？<br><span class="u">把它交給我們。</span></h2>
+    <p>無論你是調查記者、地方通訊員、研究者、社運工作者，只要你看見一個值得用資料說清楚的議題，我們想聽。</p>
+    <div class="manifesto-cta">
+      <a class="btn btn-pink" href="{{ "article/#pitch-form" | relURL }}">送出你的提案 →</a>
+    </div>
+  </div>
+</section>
 
-{{ define "scripts" }}
-<script>
-(function () {
-  /* ── Scroll progress bar ── */
-  var bar = document.getElementById('progressBar');
-  if (bar) {
-    function updateBar() {
-      var s = window.scrollY;
-      var t = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = t > 0 ? (s / t * 100) + '%' : '0%';
-    }
-    window.addEventListener('scroll', updateBar, { passive: true });
-    updateBar();
-  }
-
-  /* ── Section reveal ── */
-  var els = document.querySelectorAll('.sr');
-  if (els.length && 'IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-    els.forEach(function (el) { obs.observe(el); });
-  } else {
-    els.forEach(function (el) { el.classList.add('visible'); });
-  }
-
-  /* ── Pitch form — AJAX submission ── */
-  var form     = document.getElementById('pitchForm');
-  var btn      = document.getElementById('pitchSubmit');
-  var status   = document.getElementById('pitchStatus');
-  if (!form) return;
-
-  var endpoint = form.dataset.endpoint || '';
-  var email    = form.dataset.email    || '';
-
-  function setStatus(msg, color) {
-    status.textContent = msg;
-    status.style.color = color || '';
-  }
-
-  function validate() {
-    var name    = form.querySelector('[name="name"]').value.trim();
-    var mail    = form.querySelector('[name="email"]').value.trim();
-    var title   = form.querySelector('[name="title"]').value.trim();
-    var summary = form.querySelector('[name="summary"]').value.trim();
-    if (!name)    { setStatus('請填寫你的名字。', 'var(--danger)'); return false; }
-    if (!mail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
-      setStatus('請填寫有效的 Email。', 'var(--danger)'); return false;
-    }
-    if (!title)   { setStatus('請填寫提案標題。', 'var(--danger)'); return false; }
-    if (!summary) { setStatus('請簡短說明這個故事。', 'var(--danger)'); return false; }
-    return true;
-  }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (!validate()) return;
-
-    if (endpoint) {
-      /* ── Formspree (or any JSON endpoint) ── */
-      btn.disabled = true;
-      btn.textContent = '送出中…';
-      setStatus('');
-
-      var data = {};
-      new FormData(form).forEach(function (val, key) { data[key] = val; });
-
-      fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(function (res) {
-        return res.json().then(function (body) { return { ok: res.ok, body: body }; });
-      })
-      .then(function (r) {
-        if (r.ok) {
-          form.reset();
-          btn.textContent = '✓ 已收到！';
-          setStatus('收到了！我們會在 5 個工作天內回覆你。', 'var(--reporter-ink)');
-        } else {
-          throw new Error((r.body && r.body.error) || '送出失敗');
-        }
-      })
-      .catch(function (err) {
-        btn.disabled = false;
-        btn.textContent = '送出提案 →';
-        setStatus('送出失敗，請直接寄信至 ' + email + '（' + err.message + '）', 'var(--danger)');
-      });
-
-    } else {
-      /* ── No endpoint — open mailto via JS (no browser warning) ── */
-      var fields  = [
-        ['名字', form.querySelector('[name="name"]').value],
-        ['Email', form.querySelector('[name="email"]').value],
-        ['提案標題', form.querySelector('[name="title"]').value],
-        ['故事說明', form.querySelector('[name="summary"]').value],
-        ['資料來源', form.querySelector('[name="data"]').value],
-        ['協作方式', form.querySelector('[name="support"]').value],
-      ];
-      var body = fields.map(function (f) { return f[0] + '：' + f[1]; }).join('\n');
-      var subject = encodeURIComponent('[提案] ' + form.querySelector('[name="title"]').value);
-      window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + encodeURIComponent(body);
-      setStatus('正在開啟你的 email 程式…', '');
-    }
-  });
-})();
-</script>
 {{ end }}

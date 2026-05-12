@@ -1,0 +1,103 @@
+{{/* About page — Phang-Bit design about.html. */}}
+
+{{ define "main" }}
+
+<section class="list-hero">
+  <p class="eyebrow sr">ABOUT · 關於 phâng-bi̍t</p>
+  <h1 class="sr" data-delay="1">四個人，一張桌子，<br>一個正在開始的資料新聞編輯室。</h1>
+  <p class="sr" data-delay="2">
+    phâng-bi̍t 名字來自台語「縫密」——把細節密密縫起來。創刊於 2026 年的台北，做資料調查、互動專題、可被讀者操作的公共議題資料庫。
+  </p>
+</section>
+
+{{/* ── Team ────────────────────────────────────────── */}}
+<section class="team-section" id="team">
+  <div class="section-header sr">
+    <div>
+      <p class="eyebrow eyebrow--reporter">THE TEAM · 編輯團隊</p>
+      <h2>每一篇報導，這四個人都得在現場。</h2>
+    </div>
+    <span class="mono-meta">§01 / 03</span>
+  </div>
+  <div class="team-grid">
+    <article class="team-card sr" data-delay="1">
+      <div class="team-portrait team-portrait--designer"><span class="placeholder-label">[ PORTRAIT · 林宛俞<br>建議：500×500 ]</span></div>
+      <div class="team-card-body">
+        <h3 class="team-name">林宛俞</h3>
+        <div class="team-role">CO-FOUNDER · 編輯</div>
+        <p class="team-bio">前商業週刊資料記者。做過長照、地方創生、教育平權的調查報導。負責 phâng-bi̍t 的編輯方向與選題會議。</p>
+      </div>
+    </article>
+    <article class="team-card sr" data-delay="2">
+      <div class="team-portrait team-portrait--engineer"><span class="placeholder-label">[ PORTRAIT · 陳家瑋 ]</span></div>
+      <div class="team-card-body">
+        <h3 class="team-name">陳家瑋</h3>
+        <div class="team-role">CO-FOUNDER · 資料</div>
+        <p class="team-bio">前報導者資料分析師。擅長從政府開放資料中找出沒被講清楚的結構。喝最濃的咖啡，看最雜的試算表。</p>
+      </div>
+    </article>
+    <article class="team-card sr" data-delay="3">
+      <div class="team-portrait team-portrait--reader"><span class="placeholder-label">[ PORTRAIT · Aki Tanaka ]</span></div>
+      <div class="team-card-body">
+        <h3 class="team-name">Aki Tanaka</h3>
+        <div class="team-role">CO-FOUNDER · 設計</div>
+        <p class="team-bio">獨立資料視覺設計師。曾與 NHK、Reuters Graphics 合作專題。相信圖表的美感應該服務理解，不是反過來。</p>
+      </div>
+    </article>
+    <article class="team-card sr" data-delay="4">
+      <div class="team-portrait team-portrait--reporter"><span class="placeholder-label">[ PORTRAIT · 張子衡 ]</span></div>
+      <div class="team-card-body">
+        <h3 class="team-name">張子衡</h3>
+        <div class="team-role">CO-FOUNDER · 工程</div>
+        <p class="team-bio">前 Pinkoi 前端工程師，業餘做開源新聞工具。負責互動原型、資料庫、與每一個讓你能玩的網頁。</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+{{/* ── Method ──────────────────────────────────────── */}}
+<section class="split-section" id="method">
+  <div class="section-kicker sr">
+    <p class="eyebrow eyebrow--engineer">OUR METHOD</p>
+    <span class="mono-meta">§02 / 03</span>
+  </div>
+  <div>
+    <h2 class="section-h2 sr">我們怎麼處理一份資料？</h2>
+    <p class="sr" data-delay="1" style="max-width:680px; color:var(--ink-soft); font-size:16px;">每篇報導發表時，會附上一份「方法說明」文件，公開我們做了什麼、跳過了什麼、為什麼。下面是基本流程。</p>
+    <ol class="process-list" style="margin-top:24px;">
+      <li class="process-item sr"><span class="process-num" style="background:var(--designer)">1</span><div><h3>來源確認</h3><p>每筆資料記錄取得方式：是申請、是公開下載、還是讀者匿名提供。如果不能說明來源，就不會用。</p></div></li>
+      <li class="process-item sr" data-delay="1"><span class="process-num" style="background:var(--engineer)">2</span><div><h3>清理與比對</h3><p>欄位定義、缺漏處理、單位換算。每個我們做的決定，都會記在分析筆記裡，附在報導後讓人檢查。</p></div></li>
+      <li class="process-item sr" data-delay="2"><span class="process-num" style="background:var(--reader)">3</span><div><h3>採訪與驗證</h3><p>資料的故事必須能對到現實。每篇調查至少採訪 3 位以上的當事人或相關專業者。</p></div></li>
+      <li class="process-item sr" data-delay="3"><span class="process-num" style="background:var(--reporter)">4</span><div><h3>開源與下載</h3><p>能公開的原始檔，會放在 GitHub 上。我們希望其他記者、研究者、社運工作者可以拿去用。</p></div></li>
+    </ol>
+  </div>
+</section>
+
+{{/* ── FAQ ─────────────────────────────────────────── */}}
+<section class="faq-section" id="faq">
+  <div class="section-kicker sr">
+    <p class="eyebrow">FAQ · 常見提案疑問</p>
+    <span class="mono-meta">§03 / 03</span>
+    <p style="margin-top:16px; font-size:14px; color:var(--ink-soft); line-height:1.7;">如果你正在猶豫要不要送一份提案，這幾題大概有八成的人都問過。</p>
+  </div>
+  <ul class="faq-list">
+    <li class="faq-item"><details><summary class="faq-summary"><span class="faq-num">Q01</span><span>我不是記者，可以送提案嗎？</span><span class="faq-toggle">+</span></summary><div class="faq-body">完全可以。我們收過研究者、政策幕僚、社運工作者、地方文史工作者、甚至剛好握有一份內部資料的公民送來的提案。重點不是身分，是這份資料能不能說清楚一個公共議題。</div></details></li>
+    <li class="faq-item"><details><summary class="faq-summary"><span class="faq-num">Q02</span><span>我手上的資料還沒整理好，可以先送嗎？</span><span class="faq-toggle">+</span></summary><div class="faq-body">可以。我們知道整理資料是最耗時的部分。你只要能描述「資料大概長什麼樣」「為什麼這份資料值得看」就好。如果適合一起做，後續清理我們有人。</div></details></li>
+    <li class="faq-item"><details><summary class="faq-summary"><span class="faq-num">Q03</span><span>如果提案被接受，會有稿費嗎？</span><span class="faq-toggle">+</span></summary><div class="faq-body">會。稿費依製作規模而定，從 NT$15,000 起。互動專題或大型調查會獨立報價。資料來源若是讀者，我們會優先以共同作者方式合作，而非單純購買資料。</div></details></li>
+    <li class="faq-item"><details><summary class="faq-summary"><span class="faq-num">Q04</span><span>我可以匿名提案嗎？</span><span class="faq-toggle">+</span></summary><div class="faq-body">如果你涉及敏感身分（吹哨者、未公開的內部資料持有者），可以使用 Signal 或 ProtonMail 跟我們聯繫，phâng-bi̍t 編輯室所有人都受過資料安全訓練。聯繫信箱：secure@phangbit.cool</div></details></li>
+    <li class="faq-item"><details><summary class="faq-summary"><span class="faq-num">Q05</span><span>多久會收到回覆？被拒絕的話也會說嗎？</span><span class="faq-toggle">+</span></summary><div class="faq-body">承諾在 5 個工作天內回覆每份提案。如果適合一起做，會約一次 30 分鐘的線上提案討論；如果這次不適合，會告訴你原因，以及——如果可能——建議你可以送去哪些其他媒體。</div></details></li>
+    <li class="faq-item"><details><summary class="faq-summary"><span class="faq-num">Q06</span><span>你們會跟其他媒體聯合刊登嗎？</span><span class="faq-toggle">+</span></summary><div class="faq-body">會。phâng-bi̍t 對「報導要影響到對的人」這件事很在意。如果某個題目跟報導者、READr、地方報導等其他媒體一起做能讓影響力更大，我們很樂意合作刊登。</div></details></li>
+  </ul>
+</section>
+
+{{/* ── CTA ─────────────────────────────────────────── */}}
+<section class="manifesto-strip" style="margin-top:60px">
+  <div class="manifesto-inner">
+    <p class="eyebrow">JOIN US</p>
+    <h2>如果這幾段話讓你覺得，<br>「<span class="u">我手上正好有一個</span>」——</h2>
+    <p>那就送過來。我們會讀，會回。</p>
+    <div class="manifesto-cta"><a class="btn btn-pink" href="{{ "article/#pitch-form" | relURL }}">送出提案 →</a></div>
+  </div>
+</section>
+
+{{ end }}
