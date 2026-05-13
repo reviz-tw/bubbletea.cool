@@ -30,34 +30,9 @@
     </div>
   </div>
 
-  {{/* Featured grid: 1 large + 2 stacked */}}
-  <div class="hero-feature-grid">
-    <a class="feature-card feature-card--lg sr" href="{{ "article/" | relURL }}" data-delay="1">
-      <div class="feature-card-image feature-card-image--reader">
-        <span class="feature-card-tag feature-card-tag--pink">編輯室 · 創刊</span>
-        <span class="placeholder-label">[ COVER ART · 創刊號封面插畫<br>建議：手繪 + 資料圖表混合 ]</span>
-        <div class="feature-card-pearls">
-          <span class="pearl" style="background:var(--designer)"></span>
-          <span class="pearl" style="background:var(--engineer)"></span>
-          <span class="pearl" style="background:var(--reader)"></span>
-          <span class="pearl" style="background:var(--reporter)"></span>
-        </div>
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-meta">
-          <span>編輯室筆記</span><span class="dot"></span><span>20 分鐘閱讀</span><span class="dot"></span><span>2026.05.12</span>
-        </div>
-        <h2 class="feature-card-title">
-          為什麼我們要做一個資料新聞網站？<br>而且為什麼是 2026。
-        </h2>
-        <p class="feature-card-dek">
-          我們相信還有一些公共議題，沒有被資料好好看見過。創刊宣言，以及給資料記者的提案邀請。
-        </p>
-        <div class="feature-card-byline">by 編輯室 · Hsin-chan Chien</div>
-      </div>
-    </a>
-
-  </div>
+  {{/* Featured grid: most recent 3 stories. Lead = newest; next 2 in the
+       stack. Auto-pulls from content/stories/ via the feature-grid partial. */}}
+  {{ partial "feature-grid.html" (first 3 (site.GetPage "/stories/").Pages) }}
 </section>
 
 {{/* ── Manifesto strip ─────────────────────────────── */}}
