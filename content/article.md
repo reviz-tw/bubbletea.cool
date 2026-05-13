@@ -12,7 +12,7 @@ byline:
   by: "phâng-bi̍t 編輯室"
   published: "2026.05.12"
   reading: "約 20 分鐘"
-  contributors: "林宛俞、陳家瑋、Aki Tanaka、張子衡"
+  contributors: "Hsin-chan Chien"
 cover:
   stamp: "COVER · ISSUE 001"
   caption: "[ 創刊號封面圖 · 建議 1400×600<br>主視覺：手繪桌面 + 散落的資料圖表，呼應 brand pearl cluster ]"
