@@ -1,0 +1,45 @@
+{{/* Filter-bar partial — used by both /stories/ (section) and /categories/* and /tags/* (taxonomy term pages).
+     Receives the current page as `.`; figures out which chip is "active" from .Kind and .Title.
+     "全部" is active everywhere except on a term page.
+     A term chip ("資料調查", "居住", ...) is active when its title matches the current term's title.
+
+     The chips are <a> elements so they navigate to Hugo-generated term pages — no JS required. */}}
+
+{{ $current := . }}
+{{ $currentTerm := cond (eq .Kind "term") .Title "" }}
+{{ $storiesURL := relURL "stories/" }}
+{{ $storiesCount := len (where site.RegularPages "Section" "stories") }}
+
+<div class="filter-bar">
+  <span class="filter-label">類型</span>
+  <div class="chip-row">
+    <a class="chip{{ if ne $current.Kind "term" }} active{{ end }}" href="{{ $storiesURL }}">
+      全部 <span class="chip-count">{{ $storiesCount }}</span>
+    </a>
+    {{ range site.Taxonomies.categories.ByCount }}
+      <a class="chip{{ if eq .Page.Title $currentTerm }} active{{ end }}" href="{{ .Page.RelPermalink }}">
+        {{ .Page.Title }} <span class="chip-count">{{ .Count }}</span>
+      </a>
+    {{ end }}
+  </div>
+
+  <span class="filter-divider"></span>
+
+  <span class="filter-label">議題</span>
+  <div class="chip-row">
+    {{ range site.Taxonomies.tags.ByCount }}
+      <a class="chip{{ if eq .Page.Title $currentTerm }} active{{ end }}" href="{{ .Page.RelPermalink }}">
+        {{ .Page.Title }}
+      </a>
+    {{ end }}
+  </div>
+
+  <div class="filter-sort">
+    排序
+    <select aria-label="排序方式">
+      <option>最新發表</option>
+      <option>熱門</option>
+      <option>最多互動</option>
+    </select>
+  </div>
+</div>

@@ -1,9 +1,6 @@
-{{/* Stories archive — Phang-Bit design stories.html.
-     Cards are generated from real pages under content/stories/. Add a new
-     markdown file there and it appears here automatically, linked to its
-     own URL. The `storyCard` block in each page's front matter controls
-     how it renders in the grid (stripe color, thumb tint, pearl row,
-     short excerpt). */}}
+{{/* Stories archive — /stories/.
+     Cards come from real pages under content/stories/ (see partials/story-grid.html).
+     Chip rows come from Hugo's categories + tags taxonomies (see partials/story-filter-bar.html). */}}
 
 {{ define "main" }}
 
@@ -13,64 +10,9 @@
   <p class="sr" data-delay="2">{{ .Description | default "創刊號才剛開始，這裡會慢慢長出來。每篇都附帶資料來源、清理方法、原始檔案下載。" }}</p>
 </section>
 
-<div class="filter-bar">
-  <span class="filter-label">類型</span>
-  <div class="chip-row">
-    <span class="chip active">全部 <span class="chip-count">{{ len .Pages }}</span></span>
-    <span class="chip">資料調查</span>
-    <span class="chip">互動專題</span>
-    <span class="chip">視覺化</span>
-    <span class="chip">編輯室</span>
-  </div>
-  <span class="filter-divider"></span>
-  <span class="filter-label">議題</span>
-  <div class="chip-row">
-    <span class="chip">居住</span>
-    <span class="chip">勞權</span>
-    <span class="chip">教育</span>
-    <span class="chip">環境</span>
-    <span class="chip">公共預算</span>
-  </div>
-  <div class="filter-sort">
-    排序
-    <select aria-label="排序方式">
-      <option>最新發表</option>
-      <option>熱門</option>
-      <option>最多互動</option>
-    </select>
-  </div>
-</div>
+{{ partial "story-filter-bar.html" . }}
 
-<div class="list-grid">
-  {{ range .Pages }}
-    {{ $card := .Params.storyCard | default dict }}
-    {{ $stripe := index $card "stripe" | default "ink" }}
-    {{ $thumb := index $card "thumb" | default "" }}
-    {{ $thumbClass := cond (ne $thumb "") (printf " story-card-thumb--%s" $thumb) "" }}
-    {{ $pearls := index $card "pearls" | default (slice "" "" "" "") }}
-    <a class="story-card sr" href="{{ .RelPermalink }}">
-      <div class="story-card-stripe" style="background:var(--{{ $stripe }})"></div>
-      <div class="story-card-thumb{{ $thumbClass }}">
-        <span class="placeholder-label">{{ (index $card "thumbCaption" | default "[ THUMB ]") | safeHTML }}</span>
-      </div>
-      <div class="story-card-body">
-        <div class="story-pearls">
-          {{ range $pearls }}{{ if . }}<span class="pearl" style="background:var(--{{ . }})"></span>{{ else }}<span class="pearl"></span>{{ end }}{{ end }}
-        </div>
-        <h3>{{ .Title }}</h3>
-        <div class="story-meta">
-          {{ with index $card "category" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
-          {{ with index $card "readingTime" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
-          <span>{{ .Date.Format "2006.01.02" }}</span>
-        </div>
-        <div class="story-card-extra">
-          {{ index $card "excerpt" | default .Description }}
-          {{ with index $card "byline" }}<div class="extra-meta"><span>by {{ . }}</span></div>{{ end }}
-        </div>
-      </div>
-    </a>
-  {{ end }}
-</div>
+{{ partial "story-grid.html" . }}
 
 <div style="text-align:center; padding: 20px var(--px) 80px;">
   <a class="btn btn-secondary" href="#">載入更多 ↓</a>

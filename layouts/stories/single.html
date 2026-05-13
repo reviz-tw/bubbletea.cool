@@ -4,7 +4,9 @@
 {{ define "main" }}
 <article>
   <header class="article-hero">
-    {{ with .Params.tags }}
+    {{/* articleTags = colored pill row at the top of the article page (visual decoration, not a taxonomy).
+         Hugo `tags`/`categories` live in their own front-matter fields and drive the /stories/ chip rows. */}}
+    {{ with .Params.articleTags }}
     <div class="article-tag-row">
       {{ range . }}
       <span class="article-tag{{ with .role }} article-tag--{{ . }}{{ end }}">{{ .label }}</span>

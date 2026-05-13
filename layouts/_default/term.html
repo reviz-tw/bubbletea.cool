@@ -1,0 +1,23 @@
+{{/* Taxonomy term page — /categories/<term>/ or /tags/<term>/.
+     Reuses the /stories/ list shell (hero + filter-bar + grid), but the hero
+     shows the term name and .Pages here = pages tagged with this term. */}}
+
+{{ define "main" }}
+
+{{ $kindLabel := cond (eq .Data.Singular "category") "類型" "議題" }}
+
+<section class="list-hero">
+  <p class="eyebrow sr">{{ $kindLabel | upper }} · {{ .Data.Singular | upper }}</p>
+  <h1 class="sr" data-delay="1">{{ .Title }}</h1>
+  <p class="sr" data-delay="2">這個{{ $kindLabel }}底下有 {{ len .Pages }} 篇報導。</p>
+</section>
+
+{{ partial "story-filter-bar.html" . }}
+
+{{ partial "story-grid.html" . }}
+
+<div style="text-align:center; padding: 20px var(--px) 80px;">
+  <a class="btn btn-secondary" href="{{ "stories/" | relURL }}">← 回到所有報導</a>
+</div>
+
+{{ end }}
