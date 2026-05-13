@@ -3,6 +3,26 @@
 
 {{ define "main" }}
 
+{{/* ── Story sets for the homepage ────────────────────────────────────
+     The hero ("編輯精選") and the section below it ("最近在做的題目")
+     are two different views, so they pull two different sets:
+
+       Hero  → pages with `featured: true` in front matter, sorted by
+               date desc, capped at 3. If no story is flagged featured,
+               fall back to the 3 most recent stories.
+       Grid  → most recent 6 stories, *excluding* whatever already
+               appears in the hero, so the same card never shows twice.
+               Hidden entirely when there's nothing left to show. */}}
+{{ $allStories := (site.GetPage "/stories/").Pages }}
+{{ $featured := where $allStories "Params.featured" "eq" true }}
+{{ $heroSource := cond (gt (len $featured) 0) $featured $allStories }}
+{{ $heroPages := first 3 $heroSource }}
+
+{{ $heroPermalinks := slice }}
+{{ range $heroPages }}{{ $heroPermalinks = $heroPermalinks | append .RelPermalink }}{{ end }}
+
+{{ $gridPages := first 6 (where $allStories "RelPermalink" "not in" $heroPermalinks) }}
+
 {{/* ── Hero — Editor's Picks Cover ─────────────────── */}}
 <section class="hero-edpick" data-screen-label="hero / editor's picks">
   <div class="hero-edpick-head">
@@ -30,34 +50,8 @@
     </div>
   </div>
 
-  {{/* Featured grid: 1 large + 2 stacked */}}
-  <div class="hero-feature-grid">
-    <a class="feature-card feature-card--lg sr" href="{{ "article/" | relURL }}" data-delay="1">
-      <div class="feature-card-image feature-card-image--reader">
-        <span class="feature-card-tag feature-card-tag--pink">編輯室 · 創刊</span>
-        <span class="placeholder-label">[ COVER ART · 創刊號封面插畫<br>建議：手繪 + 資料圖表混合 ]</span>
-        <div class="feature-card-pearls">
-          <span class="pearl" style="background:var(--designer)"></span>
-          <span class="pearl" style="background:var(--engineer)"></span>
-          <span class="pearl" style="background:var(--reader)"></span>
-          <span class="pearl" style="background:var(--reporter)"></span>
-        </div>
-      </div>
-      <div class="feature-card-body">
-        <div class="feature-card-meta">
-          <span>編輯室筆記</span><span class="dot"></span><span>20 分鐘閱讀</span><span class="dot"></span><span>2026.05.12</span>
-        </div>
-        <h2 class="feature-card-title">
-          為什麼我們要做一個資料新聞網站？<br>而且為什麼是 2026。
-        </h2>
-        <p class="feature-card-dek">
-          我們相信還有一些公共議題，沒有被資料好好看見過。創刊宣言，以及給資料記者的提案邀請。
-        </p>
-        <div class="feature-card-byline">by 編輯室 · Hsin-chan Chien</div>
-      </div>
-    </a>
-
-  </div>
+  {{/* Featured grid: lead + 2 stacked, populated from $heroPages above. */}}
+  {{ partial "feature-grid.html" $heroPages }}
 </section>
 
 {{/* ── Manifesto strip ─────────────────────────────── */}}
@@ -77,7 +71,10 @@
   </div>
 </section>
 
-{{/* ── Stories grid ────────────────────────────────── */}}
+{{/* ── Stories grid — only render when there's something to show that
+       isn't already in the hero. Avoids the awkward "1 story, both
+       modules display the same card" situation. */}}
+{{ if $gridPages }}
 <section class="stories-section" id="stories" data-screen-label="stories grid">
   <div class="stories-header sr">
     <div>
@@ -90,10 +87,9 @@
   {{/* Chips link to /stories/ or term pages — the homepage is a teaser, the
        full archive lives at /stories/. JS doesn't intercept here (filter runs
        only when body.data-kind="section"+"stories"), so clicks navigate. */}}
-  {{ $storiesPages := (site.GetPage "/stories/").Pages }}
   <div class="chip-row" style="margin-bottom: 24px;">
     <a class="chip active" href="{{ "stories/" | relURL }}" data-slug="">
-      全部 <span class="chip-count">{{ len $storiesPages }}</span>
+      全部 <span class="chip-count">{{ len $allStories }}</span>
     </a>
     {{ range site.Taxonomies.categories.ByCount }}
       {{ $slug := path.Base .Page.RelPermalink }}
@@ -103,12 +99,11 @@
     {{ end }}
   </div>
 
-  {{/* Most recent 6 stories, auto-pulled from content/stories/. Sort defaults
-       to date desc, so new files appear at the top automatically. */}}
   <div class="stories-grid">
-    {{ partial "story-grid.html" (first 6 $storiesPages) }}
+    {{ partial "story-grid.html" $gridPages }}
   </div>
 </section>
+{{ end }}
 
 {{/* ── Roles ───────────────────────────────────────── */}}
 <section class="roles" id="roles" data-screen-label="roles">

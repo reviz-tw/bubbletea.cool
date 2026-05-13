@@ -1,0 +1,116 @@
+{{/* Feature-grid partial — the editor's-picks block at the top of the
+     homepage (1 big lead card + up to 2 stacked smaller cards).
+
+     Caller passes a pages slice as `.`:
+       {{ partial "feature-grid.html" (first 3 (site.GetPage "/stories/").Pages) }}
+
+     Maps each page's storyCard front-matter block to the feature-card
+     markup. The corner tag text comes from `storyCard.featureTagText` if
+     set, otherwise from the title of the page's first category term.
+     The tag color is derived from `storyCard.stripe` (the role color)
+     via the map below — designer→pink, engineer→blue, reader→yellow,
+     reporter→green. If fewer than 3 pages are supplied, missing slots
+     are just omitted (right column collapses on mobile per existing CSS). */}}
+
+{{ $pages := . }}
+{{ $lead := index $pages 0 }}
+{{ $stack := first 2 (after 1 $pages) }}
+
+{{/* Map a storyCard.stripe (role name) to the matching feature-card-tag
+     color class. Anything outside the four roles falls through with no
+     extra class (the base .feature-card-tag has an ink background). */}}
+{{ $tagColors := dict
+    "designer" "pink"
+    "engineer" "blue"
+    "reader"   "yellow"
+    "reporter" "green"
+}}
+
+<div class="hero-feature-grid">
+
+  {{/* ───── Lead card ───── */}}
+  {{ with $lead }}
+    {{ $card := .Params.storyCard | default dict }}
+    {{ $thumb := index $card "thumb" | default "" }}
+    {{ $thumbClass := cond (ne $thumb "") (printf " feature-card-image--%s" $thumb) "" }}
+    {{ $stripe := index $card "stripe" | default "ink" }}
+    {{ $tagColor := index $tagColors $stripe }}
+    {{ $tagColorClass := cond (ne $tagColor "") (printf " feature-card-tag--%s" $tagColor) "" }}
+
+    {{ $featureTagText := index $card "featureTagText" }}
+    {{ if not $featureTagText }}
+      {{ $catSlug := index (.Params.categories | default slice) 0 }}
+      {{ if $catSlug }}
+        {{ with site.GetPage (printf "/categories/%s" $catSlug) }}
+          {{ $featureTagText = .Title }}
+        {{ end }}
+        {{ if not $featureTagText }}{{ $featureTagText = $catSlug }}{{ end }}
+      {{ end }}
+    {{ end }}
+
+    <a class="feature-card feature-card--lg sr" href="{{ .RelPermalink }}" data-delay="1">
+      <div class="feature-card-image{{ $thumbClass }}">
+        {{ with $featureTagText }}<span class="feature-card-tag{{ $tagColorClass }}">{{ . }}</span>{{ end }}
+        <span class="placeholder-label">{{ (index $card "thumbCaption" | default "[ COVER ]") | safeHTML }}</span>
+        {{ with index $card "pearls" }}
+          <div class="feature-card-pearls">
+            {{ range . }}{{ if . }}<span class="pearl" style="background:var(--{{ . }})"></span>{{ else }}<span class="pearl"></span>{{ end }}{{ end }}
+          </div>
+        {{ end }}
+      </div>
+      <div class="feature-card-body">
+        <div class="feature-card-meta">
+          {{ with index $card "category" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
+          {{ with index $card "readingTime" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
+          <span>{{ .Date.Format "2006.01.02" }}</span>
+        </div>
+        <h2 class="feature-card-title">{{ .Title }}</h2>
+        {{ with (index $card "excerpt" | default .Description) }}
+          <p class="feature-card-dek">{{ . }}</p>
+        {{ end }}
+        {{ with index $card "byline" }}<div class="feature-card-byline">by {{ . }}</div>{{ end }}
+      </div>
+    </a>
+  {{ end }}
+
+  {{/* ───── Stacked cards (next 2 most recent) ───── */}}
+  {{ with $stack }}
+    <div class="feature-stack">
+      {{ range $i, $p := . }}
+        {{ $card := $p.Params.storyCard | default dict }}
+        {{ $thumb := index $card "thumb" | default "" }}
+        {{ $thumbClass := cond (ne $thumb "") (printf " feature-card-image--%s" $thumb) "" }}
+        {{ $stripe := index $card "stripe" | default "ink" }}
+        {{ $tagColor := index $tagColors $stripe }}
+        {{ $tagColorClass := cond (ne $tagColor "") (printf " feature-card-tag--%s" $tagColor) "" }}
+
+        {{ $featureTagText := index $card "featureTagText" }}
+        {{ if not $featureTagText }}
+          {{ $catSlug := index ($p.Params.categories | default slice) 0 }}
+          {{ if $catSlug }}
+            {{ with site.GetPage (printf "/categories/%s" $catSlug) }}
+              {{ $featureTagText = .Title }}
+            {{ end }}
+            {{ if not $featureTagText }}{{ $featureTagText = $catSlug }}{{ end }}
+          {{ end }}
+        {{ end }}
+
+        <a class="feature-card sr" href="{{ $p.RelPermalink }}" data-delay="{{ add $i 2 }}">
+          <div class="feature-card-image{{ $thumbClass }}">
+            {{ with $featureTagText }}<span class="feature-card-tag{{ $tagColorClass }}">{{ . }}</span>{{ end }}
+            <span class="placeholder-label">{{ (index $card "thumbCaption" | default "[ THUMB ]") | safeHTML }}</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-meta">
+              {{ with index $card "category" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
+              <span>{{ $p.Date.Format "2006.01.02" }}</span>
+            </div>
+            <h3 class="feature-card-title">{{ $p.Title }}</h3>
+            {{ with index $card "byline" }}<div class="feature-card-byline">by {{ . }}</div>{{ end }}
+          </div>
+        </a>
+      {{ end }}
+    </div>
+  {{ end }}
+
+</div>
