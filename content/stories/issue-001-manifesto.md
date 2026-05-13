@@ -2,6 +2,10 @@
 title: "為什麼我們要做一個資料新聞網站？而且為什麼是 2026。"
 date: 2026-05-12
 url: /article/  # preserve the canonical /article/ URL even though the file now lives under stories/
+# `featured: true` pins this story to the homepage hero ("編輯精選").
+# Hero shows featured stories first; if none are flagged, it falls back
+# to the most recent 3.
+featured: true
 description: "phâng-bi̍t 是一個正式創辦於 2026 年的資料新聞網站。第一篇文章想說清楚兩件事：我們為什麼想做這個，以及——我們在徵求你的提案。"
 # Hugo taxonomies — drive the chip rows on /stories/ and the /categories/ + /tags/ term pages.
 # Values are *slugs* (English). The Chinese display title for each slug lives in

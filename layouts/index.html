@@ -3,6 +3,26 @@
 
 {{ define "main" }}
 
+{{/* ── Story sets for the homepage ────────────────────────────────────
+     The hero ("編輯精選") and the section below it ("最近在做的題目")
+     are two different views, so they pull two different sets:
+
+       Hero  → pages with `featured: true` in front matter, sorted by
+               date desc, capped at 3. If no story is flagged featured,
+               fall back to the 3 most recent stories.
+       Grid  → most recent 6 stories, *excluding* whatever already
+               appears in the hero, so the same card never shows twice.
+               Hidden entirely when there's nothing left to show. */}}
+{{ $allStories := (site.GetPage "/stories/").Pages }}
+{{ $featured := where $allStories "Params.featured" "eq" true }}
+{{ $heroSource := cond (gt (len $featured) 0) $featured $allStories }}
+{{ $heroPages := first 3 $heroSource }}
+
+{{ $heroPermalinks := slice }}
+{{ range $heroPages }}{{ $heroPermalinks = $heroPermalinks | append .RelPermalink }}{{ end }}
+
+{{ $gridPages := first 6 (where $allStories "RelPermalink" "not in" $heroPermalinks) }}
+
 {{/* ── Hero — Editor's Picks Cover ─────────────────── */}}
 <section class="hero-edpick" data-screen-label="hero / editor's picks">
   <div class="hero-edpick-head">
@@ -30,9 +50,8 @@
     </div>
   </div>
 
-  {{/* Featured grid: most recent 3 stories. Lead = newest; next 2 in the
-       stack. Auto-pulls from content/stories/ via the feature-grid partial. */}}
-  {{ partial "feature-grid.html" (first 3 (site.GetPage "/stories/").Pages) }}
+  {{/* Featured grid: lead + 2 stacked, populated from $heroPages above. */}}
+  {{ partial "feature-grid.html" $heroPages }}
 </section>
 
 {{/* ── Manifesto strip ─────────────────────────────── */}}
@@ -52,7 +71,10 @@
   </div>
 </section>
 
-{{/* ── Stories grid ────────────────────────────────── */}}
+{{/* ── Stories grid — only render when there's something to show that
+       isn't already in the hero. Avoids the awkward "1 story, both
+       modules display the same card" situation. */}}
+{{ if $gridPages }}
 <section class="stories-section" id="stories" data-screen-label="stories grid">
   <div class="stories-header sr">
     <div>
@@ -65,10 +87,9 @@
   {{/* Chips link to /stories/ or term pages — the homepage is a teaser, the
        full archive lives at /stories/. JS doesn't intercept here (filter runs
        only when body.data-kind="section"+"stories"), so clicks navigate. */}}
-  {{ $storiesPages := (site.GetPage "/stories/").Pages }}
   <div class="chip-row" style="margin-bottom: 24px;">
     <a class="chip active" href="{{ "stories/" | relURL }}" data-slug="">
-      全部 <span class="chip-count">{{ len $storiesPages }}</span>
+      全部 <span class="chip-count">{{ len $allStories }}</span>
     </a>
     {{ range site.Taxonomies.categories.ByCount }}
       {{ $slug := path.Base .Page.RelPermalink }}
@@ -78,12 +99,11 @@
     {{ end }}
   </div>
 
-  {{/* Most recent 6 stories, auto-pulled from content/stories/. Sort defaults
-       to date desc, so new files appear at the top automatically. */}}
   <div class="stories-grid">
-    {{ partial "story-grid.html" (first 6 $storiesPages) }}
+    {{ partial "story-grid.html" $gridPages }}
   </div>
 </section>
+{{ end }}
 
 {{/* ── Roles ───────────────────────────────────────── */}}
 <section class="roles" id="roles" data-screen-label="roles">
