@@ -1,0 +1,30 @@
+# phangbit.cool — robots policy
+# Allow everything for general crawlers. Explicit allow lines for the
+# major social-media scrapers because their debuggers (e.g. Facebook
+# Sharing Debugger) flag a 404 on /robots.txt as a possible block.
+
+User-agent: *
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+Sitemap: https://www.phangbit.cool/sitemap.xml
