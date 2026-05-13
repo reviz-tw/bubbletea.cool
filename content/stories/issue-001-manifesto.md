@@ -1,6 +1,7 @@
 ---
 title: "為什麼我們要做一個資料新聞網站？而且為什麼是 2026。"
 date: 2026-05-12
+url: /article/  # preserve the canonical /article/ URL even though the file now lives under stories/
 description: "phâng-bi̍t 是一個正式創辦於 2026 年的資料新聞網站。第一篇文章想說清楚兩件事：我們為什麼想做這個，以及——我們在徵求你的提案。"
 tags:
   - label: "編輯室筆記"
@@ -16,6 +17,17 @@ byline:
 cover:
   stamp: "COVER · ISSUE 001"
   caption: "[ 創刊號封面圖 · 建議 1400×600<br>主視覺：手繪桌面 + 散落的資料圖表，呼應 brand pearl cluster ]"
+# storyCard drives how the page appears in the /stories/ grid + homepage feature grid.
+# pearls is a 4-slot list — each slot is either a role name (designer/engineer/reader/reporter) or null.
+storyCard:
+  category: "編輯室 · 創刊宣言"
+  readingTime: "20 min"
+  stripe: designer
+  thumb: reader
+  pearls: ["designer", "engineer", "reader", "reporter"]
+  byline: "編輯室"
+  thumbCaption: "[ COVER · 創刊號封面插畫<br>建議：手繪 + 資料圖表混合 ]"
+  excerpt: "我們相信還有一些公共議題，沒有被資料好好看見過。創刊宣言，以及給資料記者的提案邀請。"
 ---
 
 2026 年，台灣的新聞已經有夠多了。每天滑過去的訊息流，光是頭條就有上百則。但我們卻經常想要知道報導裡面的內容是一個社會現象、結構性問題，或是某些個案。我們需要更多的資料來讓我們了解整個議題的全貌，也是我們討論公共議題的基礎。
