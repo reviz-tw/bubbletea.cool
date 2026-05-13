@@ -1,23 +1,34 @@
-{{/* Filter-bar partial — used by both /stories/ (section) and /categories/* and /tags/* (taxonomy term pages).
-     Receives the current page as `.`; figures out which chip is "active" from .Kind and .Title.
-     "全部" is active everywhere except on a term page.
-     A term chip ("資料調查", "居住", ...) is active when its title matches the current term's title.
+{{/* Filter-bar partial — used by both /stories/ (section) and /categories/* and /tags/* (term pages).
 
-     The chips are <a> elements so they navigate to Hugo-generated term pages — no JS required. */}}
+     On /stories/: the filter JS in site.js intercepts chip clicks, hides/shows
+     cards in place, and updates location.hash to the chip's slug. The href on
+     each chip is the term page URL (English slug) so a JS-off visitor still
+     gets a working server-rendered fallback.
+
+     On term pages: clicks navigate normally to other term pages — no JS hook.
+
+     "Active" chip:
+       - "全部" is active when not on a term page.
+       - A term chip is active when its title matches the current term's title
+         (server-rendered initial state; JS overrides it on /stories/). */}}
 
 {{ $current := . }}
 {{ $currentTerm := cond (eq .Kind "term") .Title "" }}
 {{ $storiesURL := relURL "stories/" }}
 {{ $storiesCount := len (where site.RegularPages "Section" "stories") }}
 
+{{/* `slug` for a term page URL is the last path segment (e.g. "editorial"
+     from "/categories/editorial/"). path.Base handles the trailing slash. */}}
+
 <div class="filter-bar">
   <span class="filter-label">類型</span>
   <div class="chip-row">
-    <a class="chip{{ if ne $current.Kind "term" }} active{{ end }}" href="{{ $storiesURL }}">
+    <a class="chip{{ if ne $current.Kind "term" }} active{{ end }}" href="{{ $storiesURL }}" data-slug="">
       全部 <span class="chip-count">{{ $storiesCount }}</span>
     </a>
     {{ range site.Taxonomies.categories.ByCount }}
-      <a class="chip{{ if eq .Page.Title $currentTerm }} active{{ end }}" href="{{ .Page.RelPermalink }}">
+      {{ $slug := path.Base .Page.RelPermalink }}
+      <a class="chip{{ if eq .Page.Title $currentTerm }} active{{ end }}" href="{{ .Page.RelPermalink }}" data-slug="{{ $slug }}">
         {{ .Page.Title }} <span class="chip-count">{{ .Count }}</span>
       </a>
     {{ end }}
@@ -28,7 +39,8 @@
   <span class="filter-label">議題</span>
   <div class="chip-row">
     {{ range site.Taxonomies.tags.ByCount }}
-      <a class="chip{{ if eq .Page.Title $currentTerm }} active{{ end }}" href="{{ .Page.RelPermalink }}">
+      {{ $slug := path.Base .Page.RelPermalink }}
+      <a class="chip{{ if eq .Page.Title $currentTerm }} active{{ end }}" href="{{ .Page.RelPermalink }}" data-slug="{{ $slug }}">
         {{ .Page.Title }}
       </a>
     {{ end }}

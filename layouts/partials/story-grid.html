@@ -9,7 +9,11 @@
     {{ $thumb := index $card "thumb" | default "" }}
     {{ $thumbClass := cond (ne $thumb "") (printf " story-card-thumb--%s" $thumb) "" }}
     {{ $pearls := index $card "pearls" | default (slice "" "" "" "") }}
-    <a class="story-card sr" href="{{ .RelPermalink }}">
+    {{/* data-categories + data-tags expose the taxonomy slugs so the filter JS
+         on /stories/ can show/hide cards client-side without navigation. */}}
+    <a class="story-card sr" href="{{ .RelPermalink }}"
+       data-categories="{{ delimit (.Params.categories | default slice) " " }}"
+       data-tags="{{ delimit (.Params.tags | default slice) " " }}">
       <div class="story-card-stripe" style="background:var(--{{ $stripe }})"></div>
       <div class="story-card-thumb{{ $thumbClass }}">
         <span class="placeholder-label">{{ (index $card "thumbCaption" | default "[ THUMB ]") | safeHTML }}</span>
