@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200">
+  <rect width="1200" height="1200" fill="#FFF7E4"/>
+  <g opacity="0.7">
+    <line x1="96" y1="0" x2="96" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="192" y1="0" x2="192" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="288" y1="0" x2="288" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="384" y1="0" x2="384" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="480" y1="0" x2="480" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="576" y1="0" x2="576" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="672" y1="0" x2="672" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="768" y1="0" x2="768" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="864" y1="0" x2="864" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="960" y1="0" x2="960" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="1056" y1="0" x2="1056" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+    <line x1="1152" y1="0" x2="1152" y2="1200" stroke="#100C0A" stroke-opacity="0.04" stroke-width="1"/>
+  </g>
+
+  <g transform="translate(252 260)">
+    <rect x="0" y="0" width="696" height="600" rx="48" fill="#100C0A"/>
+    <g transform="translate(35 60) scale(8)">
+      <polygon points="13.86,0 27.71,8 27.71,24 13.86,32 0,24 0,8"
+               fill="#00C2FF" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+      <polygon points="41.57,0 55.43,8 55.43,24 41.57,32 27.71,24 27.71,8"
+               fill="#FFD400" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+      <polygon points="27.71,24 41.57,32 41.57,48 27.71,56 13.86,48 13.86,32"
+               fill="#FF2E88" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+      <polygon points="55.43,24 69.28,32 69.28,48 55.43,56 41.57,48 41.57,32"
+               fill="#6FE83A" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <text x="600" y="1020" font-family="Helvetica, Arial, sans-serif"
+        font-weight="700" font-size="84" letter-spacing="-2"
+        fill="#100C0A" text-anchor="middle">phangbit<tspan fill="#FF2E88">.</tspan>cool</text>
+  <text x="600" y="1090" font-family="Helvetica, Arial, sans-serif"
+        font-weight="500" font-size="36" letter-spacing="2"
+        fill="#6E5F50" text-anchor="middle">資料報導與互動敘事</text>
+</svg>
