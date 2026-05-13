@@ -8,8 +8,17 @@
   <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} | 資料報導提案入口{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}">
   <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="{{ "images/pitch-desk.png" | absURL }}">
+  {{/* Default OG image is the brand card at /images/og-default.png (1200×1200).
+       Override per-page by setting `ogImage: images/<file>.png` in front matter
+       — e.g. on a story page once a real cover ships. Source SVG lives next to
+       the PNG (static/images/og-default.svg); regenerate with:
+         qlmanage -t -s 1200 -o /tmp /path/to/og-default.svg */}}
+  {{ $ogImage := .Params.ogImage | default "images/og-default.png" }}
+  <meta property="og:image" content="{{ $ogImage | absURL }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="1200">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ $ogImage | absURL }}">
   <link rel="icon" href="{{ "images/favicon.svg" | relURL }}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
