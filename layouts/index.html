@@ -87,15 +87,26 @@
     <a class="stories-more" href="{{ "stories/" | relURL }}">全部報導 →</a>
   </div>
 
+  {{/* Chips link to /stories/ or term pages — the homepage is a teaser, the
+       full archive lives at /stories/. JS doesn't intercept here (filter runs
+       only when body.data-kind="section"+"stories"), so clicks navigate. */}}
+  {{ $storiesPages := (site.GetPage "/stories/").Pages }}
   <div class="chip-row" style="margin-bottom: 24px;">
-    <span class="chip active">全部 <span class="chip-count">12</span></span>
-    <span class="chip">資料調查 <span class="chip-count">5</span></span>
-    <span class="chip">互動專題 <span class="chip-count">4</span></span>
-    <span class="chip">視覺化 <span class="chip-count">2</span></span>
-    <span class="chip">編輯室 <span class="chip-count">1</span></span>
+    <a class="chip active" href="{{ "stories/" | relURL }}" data-slug="">
+      全部 <span class="chip-count">{{ len $storiesPages }}</span>
+    </a>
+    {{ range site.Taxonomies.categories.ByCount }}
+      {{ $slug := path.Base .Page.RelPermalink }}
+      <a class="chip" href="{{ .Page.RelPermalink }}" data-slug="{{ $slug }}">
+        {{ .Page.Title }} <span class="chip-count">{{ .Count }}</span>
+      </a>
+    {{ end }}
   </div>
 
+  {{/* Most recent 6 stories, auto-pulled from content/stories/. Sort defaults
+       to date desc, so new files appear at the top automatically. */}}
   <div class="stories-grid">
+    {{ partial "story-grid.html" (first 6 $storiesPages) }}
   </div>
 </section>
 
