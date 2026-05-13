@@ -12,7 +12,9 @@
 
 {{ partial "story-filter-bar.html" . }}
 
-{{ partial "story-grid.html" . }}
+<div class="list-grid">
+  {{ partial "story-grid.html" .Pages }}
+</div>
 
 <div style="text-align:center; padding: 20px var(--px) 80px;">
   <a class="btn btn-secondary" href="#">載入更多 ↓</a>
