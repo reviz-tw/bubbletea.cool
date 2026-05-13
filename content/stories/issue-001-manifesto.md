@@ -3,7 +3,13 @@ title: "為什麼我們要做一個資料新聞網站？而且為什麼是 2026�
 date: 2026-05-12
 url: /article/  # preserve the canonical /article/ URL even though the file now lives under stories/
 description: "phâng-bi̍t 是一個正式創辦於 2026 年的資料新聞網站。第一篇文章想說清楚兩件事：我們為什麼想做這個，以及——我們在徵求你的提案。"
-tags:
+# Hugo taxonomies — drive the chip rows on /stories/ and the /categories/ + /tags/ term pages.
+# Values are *slugs* (English). The Chinese display title for each slug lives in
+# content/categories/<slug>/_index.md and content/tags/<slug>/_index.md.
+categories: ["editorial"]
+tags: ["launch", "public-interest"]
+# articleTags renders the colored pill row at the top of the article page itself (not a taxonomy).
+articleTags:
   - label: "編輯室筆記"
     role: "designer"
   - label: "創刊宣言"

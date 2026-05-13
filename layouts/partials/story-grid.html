@@ -1,0 +1,38 @@
+{{/* Story-grid partial — iterates over `.Pages` and renders the linked card grid.
+     Used by /stories/ (.Pages = section children) and by /categories/* and /tags/* (.Pages = pages tagged with that term).
+     Each card pulls visual config from the page's `storyCard` front-matter block. */}}
+
+<div class="list-grid">
+  {{ range .Pages }}
+    {{ $card := .Params.storyCard | default dict }}
+    {{ $stripe := index $card "stripe" | default "ink" }}
+    {{ $thumb := index $card "thumb" | default "" }}
+    {{ $thumbClass := cond (ne $thumb "") (printf " story-card-thumb--%s" $thumb) "" }}
+    {{ $pearls := index $card "pearls" | default (slice "" "" "" "") }}
+    {{/* data-categories + data-tags expose the taxonomy slugs so the filter JS
+         on /stories/ can show/hide cards client-side without navigation. */}}
+    <a class="story-card sr" href="{{ .RelPermalink }}"
+       data-categories="{{ delimit (.Params.categories | default slice) " " }}"
+       data-tags="{{ delimit (.Params.tags | default slice) " " }}">
+      <div class="story-card-stripe" style="background:var(--{{ $stripe }})"></div>
+      <div class="story-card-thumb{{ $thumbClass }}">
+        <span class="placeholder-label">{{ (index $card "thumbCaption" | default "[ THUMB ]") | safeHTML }}</span>
+      </div>
+      <div class="story-card-body">
+        <div class="story-pearls">
+          {{ range $pearls }}{{ if . }}<span class="pearl" style="background:var(--{{ . }})"></span>{{ else }}<span class="pearl"></span>{{ end }}{{ end }}
+        </div>
+        <h3>{{ .Title }}</h3>
+        <div class="story-meta">
+          {{ with index $card "category" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
+          {{ with index $card "readingTime" }}<span>{{ . }}</span><span class="dot"></span>{{ end }}
+          <span>{{ .Date.Format "2006.01.02" }}</span>
+        </div>
+        <div class="story-card-extra">
+          {{ index $card "excerpt" | default .Description }}
+          {{ with index $card "byline" }}<div class="extra-meta"><span>by {{ . }}</span></div>{{ end }}
+        </div>
+      </div>
+    </a>
+  {{ end }}
+</div>

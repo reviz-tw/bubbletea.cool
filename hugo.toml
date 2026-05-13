@@ -1,7 +1,18 @@
 baseURL = 'https://bubbletea.cool/'
 languageCode = 'zh-tw'
 title = 'PHANGBIT'
-disableKinds = ['taxonomy', 'term']
+
+# Disable just the taxonomy *index* pages (/categories/ and /tags/) —
+# the chip row on /stories/ already acts as the index, so we don't need
+# them. Individual `term` pages (/categories/編輯室/, /tags/創刊/) stay
+# enabled so chip clicks land somewhere.
+disableKinds = ['taxonomy']
+
+# Hugo's built-in `categories` and `tags` taxonomies drive the chip
+# rows on /stories/ (類型 + 議題).
+[taxonomies]
+  category = "categories"
+  tag      = "tags"
 
 [markup]
   [markup.goldmark]
