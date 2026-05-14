@@ -17,7 +17,9 @@
 
   <g transform="translate(252 260)">
     <rect x="0" y="0" width="696" height="600" rx="48" fill="#100C0A"/>
-    <g transform="translate(35 60) scale(8)">
+    <!-- Centre the 554.24x448 cluster inside the 696x600 ink box:
+         (696-554.24)/2 ~= 71 horizontally, (600-448)/2 = 76 vertically. -->
+    <g transform="translate(71 76) scale(8)">
       <polygon points="13.86,0 27.71,8 27.71,24 13.86,32 0,24 0,8"
                fill="#00C2FF" stroke="#FFF7E4" stroke-width="2.4" stroke-linejoin="round"/>
       <polygon points="41.57,0 55.43,8 55.43,24 41.57,32 27.71,24 27.71,8"
