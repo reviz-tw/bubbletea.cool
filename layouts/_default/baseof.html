@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ block "title" . }}{{ if .IsHome }}{{ site.Title }} | 資料報導提案入口{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{/* Canonical = the page's full permalink under hugo.toml's baseURL
+       (https://www.phangbit.cool/...). Tells crawlers — and Facebook's
+       debugger specifically — that the www. version is the source of
+       truth, even if someone shares an apex / mixed-case / trailing-
+       slash variant. */}}
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} | 資料報導提案入口{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}">
   <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <meta property="og:type" content="website">
